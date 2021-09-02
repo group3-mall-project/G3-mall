@@ -31,8 +31,20 @@
 
 > member
 
+String userId        <pk>
+String userName      <NN>
+String userPw        <NN>
+String userEmail     <UQ>
+String userAddress   <NN>
+String userAddress_extra 
+String gender        <NN>
+String like          varchar(1000)
+DATE joinDate        now()
+
 > admin
 
+ 
+ 
 > goods
 
 > goods_thumb
