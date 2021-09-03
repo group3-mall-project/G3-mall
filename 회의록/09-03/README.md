@@ -5,6 +5,35 @@ mysql  Ver 14.14 Distrib `5.7.34` <br>
 
 ---
 
-> # DB column
+## **_💾 DB_**
 
-* member
+> member
+<pre>
+ String userId        [pk]
+ String userName      [NN]
+ String userPw        [NN]
+ String userEmail     [UQ]
+ String userAddress   [NN]
+ String userAddress_extra 
+ String gender        [NN]
+ String like          varchar(1000)
+ DATE joinDate        now()
+</pre>
+
+> admin
+<pre>
+
+
+</pre>
+ 
+ 
+> goods
+
+> goods_thumb
+
+> basket
+
+> board
+
+> etc.
+
