@@ -2,15 +2,16 @@
 
 > member
 <pre>
- String userId        [pk]
- String userName      [NN]
- String userPw        [NN]
- String userEmail     [UQ]
- String userAddress   [NN]
- String userAddress_extra 
- String gender        [NN]
- String like          varchar(1000)
- DATE joinDate        now()
+u_id      varchar(45) COLLATE utf8_bin NOT NULL,
+u_pw      varchar(45) COLLATE utf8_bin NOT NULL,
+u_name    varchar(45) COLLATE utf8_bin NOT NULL,
+u_email   varchar(100) COLLATE utf8_bin DEFAULT NULL,
+u_phone   varchar(45) COLLATE utf8_bin NOT NULL,
+u_address varchar(45) COLLATE utf8_bin NOT NULL,
+u_gender  varchar(45) COLLATE utf8_bin NOT NULL,
+u_birth   int(11) NOT NULL,
+u_like    varchar(45) COLLATE utf8_bin DEFAULT NULL,
+joindate  date DEFAULT NULL,
 </pre>
 
 > admin
