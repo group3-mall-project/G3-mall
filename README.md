@@ -12,6 +12,7 @@
 
 ### 📚 기술 스택 <br>
  - Spring, JS, JAVA, MySQL, Apache
+ - 리팩토링 후 Vue 도전해볼지도?
 
 ### 📆 일정 <br>
 
