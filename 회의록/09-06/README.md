@@ -7,8 +7,4 @@
 6. 필요기능 모으고 분배
 7. whimsical로 결정
 8. 스프린트(3일)기간 내에 코딩 끝날시에 다른 조랑 협업하기
-9. 오류로 오래 막힐시에 찾지 못할 때에도 도움요청하여 같이 돌파구 찾기
-10. order(테이블) 예약어 이슈 테이블명 ord 로 정정
-11.  깃허브 테스트중
-12. 123112312
-13. &lt;groupId&gt;com.itwillbs&lt;/groupId&gt; -> &lt;groupId&gt;com.g3&lt;/groupId&gt; || pom.xml line 5 오류수정
+9.  깃허브 테스트중 12311231
