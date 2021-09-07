@@ -10,4 +10,5 @@
 9. 오류로 오래 막힐시에 찾지 못할 때에도 도움요청하여 같이 돌파구 찾기
 10. order(테이블) 예약어 이슈 테이블명 ord 로 정정
 11.  깃허브 테스트중
-12123112312
+12. 123112312
+13. <groupId>com.itwillbs</groupId> -> <groupId>com.g3</groupId> || pom.xml line 5 오류수정
