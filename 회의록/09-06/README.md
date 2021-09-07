@@ -11,4 +11,4 @@
 10. order(테이블) 예약어 이슈 테이블명 ord 로 정정
 11.  깃허브 테스트중
 12. 123112312
-13. <groupId>com.itwillbs</groupId> -> <groupId>com.g3</groupId> || pom.xml line 5 오류수정
+13. &lt;groupId&gt;com.itwillbs&lt;/groupId&gt; -> &lt;groupId&gt;com.g3&lt;/groupId&gt; || pom.xml line 5 오류수정
