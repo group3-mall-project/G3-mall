@@ -14,7 +14,7 @@ public class OrderVO {
 	private String o_p_name; // 주문한 상품이름
 	private int o_p_amount; // 주문한 상품수량
 	private String o_p_option; // 주문한 상품옵션
-	private String o_u_id; // 주문한 아이디
+	private String u_id; // 주문한 아이디
 	
 	// 배송정보
 	private String o_d_name; // 배송받는 사람이름
@@ -69,11 +69,11 @@ public class OrderVO {
 	public void setO_p_option(String o_p_option) {
 		this.o_p_option = o_p_option;
 	}
-	public String getO_u_id() {
-		return o_u_id;
+	public String getU_id() {
+		return u_id;
 	}
-	public void setO_u_id(String o_u_id) {
-		this.o_u_id = o_u_id;
+	public void setU_id(String u_id) {
+		this.u_id = u_id;
 	}
 	public String getO_d_name() {
 		return o_d_name;
