@@ -1,11 +1,9 @@
 package com.g3.domain;
 
-import java.util.Date;
-
-import lombok.Data;
+import java.sql.Date; // MySQL과 같은 Date 자료형으로 변경
 
 public class OrderVO {
-	// 주문 테이블
+	// 주문테이블
 	private int o_num; // 주문 테이블번호
 	
 	// 주문정보
@@ -28,7 +26,7 @@ public class OrderVO {
 	private String o_acc_payer; // 결제하는 사람
 	private Date o_acc_date; // 결제하는 날짜
 	
-	// 운송장 정보
+	// 운송장정보
 	private String o_way_num; // 운송장 번호
 	private Date o_date; // 주문날짜
 	private int o_status; // 주문상태
@@ -145,7 +143,7 @@ public class OrderVO {
 	@Override
 	public String toString() {
 		return "OrderVO [o_num=" + o_num + ", o_d_num=" + o_d_num + ", o_p_num=" + o_p_num + ", o_p_name=" + o_p_name
-				+ ", o_p_amount=" + o_p_amount + ", o_p_option=" + o_p_option + ", o_u_id=" + o_u_id + ", o_d_name="
+				+ ", o_p_amount=" + o_p_amount + ", o_p_option=" + o_p_option + ", o_u_id=" + u_id + ", o_d_name="
 				+ o_d_name + ", o_d_add=" + o_d_add + ", o_d_phone=" + o_d_phone + ", o_d_msg=" + o_d_msg
 				+ ", o_sum_money=" + o_sum_money + ", o_acc_type=" + o_acc_type + ", o_acc_payer=" + o_acc_payer
 				+ ", o_acc_date=" + o_acc_date + ", o_way_num=" + o_way_num + ", o_date=" + o_date + ", o_status="
