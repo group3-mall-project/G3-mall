@@ -1,5 +1,7 @@
 package com.g3.web;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -8,9 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.g3.domain.BasketVO;
+import com.g3.domain.Ad_ProductVO;
 import com.g3.service.BasketService;
 
 @Controller
@@ -22,23 +23,24 @@ public class BasketController {
 	// 서비스 객체를 주입
 	@Inject
 	private BasketService service;
-	private BasketVO bvo;
 	
-	
-	@RequestMapping(value = "/addProductInBasket", method = RequestMethod.POST)
-	public String addProductInBasket(@RequestParam("p_num") int p_num, HttpSession session) throws Exception {
+	@RequestMapping(value = "/addProductInBasket", method = RequestMethod.GET)
+	public void addProductInBasket(Ad_ProductVO prod, HttpSession session) throws Exception {
+		//ad product -> porduct 변경 고민@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		String id = (String) session.getAttribute("u_id");
+		service.insertProductInBasket(prod,id);
 		
+		// 장바구니 중복 경우 id, p_name, p_option 같으면 개수 +a 필요
+	}
+	
+	@RequestMapping(value = "/basketList",method = RequestMethod.GET)
+	public String basketList(HttpSession session) throws Exception {
 		String id = (String) session.getAttribute("u_id");
 		
-		bvo.setU_id(id);
+		List basketList = service.basketList(id);
 		
 		return "";
 	}
-	
-	
-	
-	
-	
 	
 	
 }
