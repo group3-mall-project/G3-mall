@@ -42,7 +42,7 @@ public class AdminOrderController {
 	
 	// 총 주문조회
 	// http://localhost:8088/controller/adminOrder/allUser (GET)
-	@RequestMapping(value="/allUser", method=RequestMethod.GET)
+	@RequestMapping(value="/allUsers", method=RequestMethod.GET)
 	public void displayAllOrdersOfAllUsersGET(HttpSession session, Model model) throws Exception {
 		// 세션값 없을 경우
 		//String u_id = (String)session.getAttribute("u_id");
