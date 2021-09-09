@@ -3,4 +3,55 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="com.g3.mapper.BasketMapper"/>
+  <mapper namespace="com.g3.mapper.BasketMapper">
+  
+  	<!-- 새로운 장바구니 번호 -->
+	<select id="getNewBasketNumber" resultType="int">
+		select max(b_num)
+		from g3_basket
+	</select>
+  	<!-- 장바구니 체크 -->
+  	<select id="checkBasket" resultType="com.g3.domain.BasketVO">
+  		select b_num, b_p_amount from g3_basket
+  		where u_id=#{u_id},b_p_num=#{prod.p_num}, b_p_option=#{prod.p_option}  		
+  	</select>
+  	
+  	<!-- 새로운 장바구니 추가 -->
+  	<insert id="insertProductInBasket">
+		insert into g3_basket
+		values(b_num=#{newBasketNumber}, u_id=#{u_id}, b_p_num=#{prod.p_num}, b_p_amount=#{@@@@@@@@@@@@@@@AAAAAAAAAAAmounTTTTTTTT}, b_p_option=#{prod.option}, b_date=now())
+  	</insert>
+  	  	<!-- amount tag name 'amount' 수정해야됨 amount 일지도? -->
+  	
+  	<!--  -->
+  	<update id="updateAmountProductInBasket">
+		update g3_basket
+		set b_p_amount=b_p_amount+#{bvo.b_p_amount}
+		where b_num=#{b_num}
+  	</update>
+  	
+  	
+	<!-- 장바구니 목록 조회 -->
+	<select id="basketList" resultType="List">
+		select p.p_image, b.b_num, b.u_id, b_p_num, b_p_amount, b_p_option, b_p_price, b_date
+		from g3_basket AS b
+		join g3_product AS p
+		on p.p_num = b.b_p_num
+		where b.u_id = #{u_id}
+	</select>  	
+
+	<!-- like 컬럼 가져오기 -->
+	<select id="getLike" resultType="string">
+		select u_like from g3_user
+		where u_id=#{u_id}
+	</select>
+	
+	<!-- like 이미지 가격 가져오기 -->
+	<select id="getImagePriceFromProduct" resultType="ProductVO">
+		select p_image,p_price from g3_product
+		where p_num=#{likeArr}
+	</select>
+	
+	
+	
+  </mapper>
