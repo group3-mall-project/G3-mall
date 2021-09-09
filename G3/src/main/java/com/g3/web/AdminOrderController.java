@@ -100,7 +100,7 @@ public class AdminOrderController {
 		System.out.println("beginningDate: "+svo.getBeginningDate());
 		System.out.println("endDate: "+svo.getEndDate());
 		System.out.println("advancedSearch: "+svo.getAdvancedSearch());
-		System.out.println("userInput: "+svo.getUserQuery());
+		System.out.println("userQuery: "+svo.getUserQuery());
 		
 		return "/adminOrder/ex_displaySearchOrder";
 	}
