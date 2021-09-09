@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.g3.mapper.AdminOrderMapper"> 
+	<select id="getAllOrdersOfUser" resultType="com.g3.domain.OrderVO">
+		select * from ord
+		where u_id = #{u_id}
+		group by o_num
+		order by o_num desc
+	</select>
+	
+	<select id="getAllOrdersOfAllUsers" resultType="com.g3.domain.OrderVO">
+		select * from ord
+		where u_id != #{u_id}
+		group by o_num
+		order by o_num desc
+	</select>
+	
+	<select id="getDailySumTotal" resultType="com.g3.domain.OrderVO">
+      select sum(o_sum_money) as 'o_sum_money', o_acc_date
+      from ord
+      group by o_acc_date
+      order by o_acc_date desc
+	</select>
+	
+	<select id="getMonthlySumTotal" resultType="com.g3.domain.OrderVO">
+	  select year(o_acc_date) as 'o_p_num', month(o_acc_date) as 'o_p_amount', sum(o_sum_money) as 'o_sum_money'
+	  from ord
+	  group by year(o_acc_date), month(o_acc_date)
+	  order by year(o_acc_date) desc, month(o_acc_date) desc
+	</select>
+</mapper>
