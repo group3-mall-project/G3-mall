@@ -87,7 +87,7 @@ public class AdminOrderServiceImpl implements AdminOrderService {
 	// Work in progress
 	// 주문검색
 	@Override
-	public List<SearchOrderVO> searchOrder(SearchOrderVO svo) {
+	public List<SearchOrderVO> searchOrder(SearchOrderVO sovo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
