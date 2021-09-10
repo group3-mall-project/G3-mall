@@ -20,5 +20,5 @@ public interface AdminOrderService {
 	public List<OrderVO> getMonthlySumTotal();
 	
 	// 주문검색
-	public List<SearchOrderVO> searchOrder(SearchOrderVO svo);
+	public List<SearchOrderVO> searchOrder(SearchOrderVO sovo);
 }
