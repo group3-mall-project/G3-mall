@@ -38,7 +38,7 @@ public class BasketController {
 		String id = (String) session.getAttribute("u_id");
 		
 		List basketList = service.basketList(id);
-		저장확인
+		저장확인 ~.~
 		return "";
 	}
 	
