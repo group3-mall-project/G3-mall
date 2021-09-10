@@ -40,7 +40,7 @@ public class AdminOrderServiceImpl implements AdminOrderService {
 	public List<OrderVO> getAllOrdersOfAllUsers(String u_id) {
 		List<OrderVO> allOrdersOfAllUsersList;
 		
-		System.out.println("Business(Service): Persistence(DAO) getAllOrdersOfAllUsers() 호출");
+		System.out.println("Business(Service): Persistence(DAO) getAllOrdersOfAllUsers(String u_id) 호출");
 		
 		allOrdersOfAllUsersList = aodao.getAllOrdersOfAllUsers(u_id);
 		
