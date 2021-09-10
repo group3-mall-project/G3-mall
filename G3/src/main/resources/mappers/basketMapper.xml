@@ -18,8 +18,8 @@
   	
   	<!-- 새로운 장바구니 추가 -->
   	<insert id="insertProductInBasket">
-		insert into g3_basket
-		values(b_num=#{newBasketNumber}, u_id=#{u_id}, b_p_num=#{prod.p_num}, b_p_amount=#{@@@@@@@@@@@@@@@AAAAAAAAAAAmounTTTTTTTT}, b_p_option=#{prod.option}, b_date=now())
+		insert into g3_basket(b_num, u_id, b_p_num, b_p_amount, b_p_option, b_date)
+		values(#{newBasketNumber}, #{u_id}, #{prod.p_num}, #{@@@@@@@@@@@@@@@AAAAAAAAAAAmounTTTTTTTT}, #{prod.option}, now())
   	</insert>
   	  	<!-- amount tag name 'amount' 수정해야됨 amount 일지도? -->
   	
