@@ -19,16 +19,16 @@
 	</select>
 	
 	<select id="getDailySumTotal" resultType="com.g3.domain.OrderVO">
-      select sum(o_sum_money) as 'o_sum_money', o_acc_date
-      from ord
-      group by o_acc_date
-      order by o_acc_date desc
+      		select sum(o_sum_money) as 'o_sum_money', o_acc_date
+      		from ord
+      		group by o_acc_date
+      		order by o_acc_date desc
 	</select>
 	
 	<select id="getMonthlySumTotal" resultType="com.g3.domain.OrderVO">
-	  select year(o_acc_date) as 'o_p_num', month(o_acc_date) as 'o_p_amount', sum(o_sum_money) as 'o_sum_money'
-	  from ord
-	  group by year(o_acc_date), month(o_acc_date)
-	  order by year(o_acc_date) desc, month(o_acc_date) desc
+	  	select year(o_acc_date) as 'o_p_num', month(o_acc_date) as 'o_p_amount', sum(o_sum_money) as 'o_sum_money'
+	 	from ord
+	  	group by year(o_acc_date), month(o_acc_date)
+	  	order by year(o_acc_date) desc, month(o_acc_date) desc
 	</select>
 </mapper>
