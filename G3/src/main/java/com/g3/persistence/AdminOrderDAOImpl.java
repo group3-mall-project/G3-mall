@@ -48,7 +48,7 @@ public class AdminOrderDAOImpl implements AdminOrderDAO {
 		// Q&A: new 할당 필요? -> selectList가 할당!		
 		List<OrderVO> allOrdersOfAllUsersList;
 		
-		System.out.println("Persistence(DAO): getAllOrdersOfAllUsers() 호출");
+		System.out.println("Persistence(DAO): getAllOrdersOfAllUsers(u_id) 호출");
 		System.out.println("Persistence(Mapper): adminOrderMapper.xml 이동 후 SQL 구문 실행");
 		
 		allOrdersOfAllUsersList = sqlSession.selectList(namespace+".getAllOrdersOfAllUsers", u_id);
