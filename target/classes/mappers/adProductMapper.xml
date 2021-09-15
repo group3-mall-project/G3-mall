@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.g3.mapper.adProductMapper">
+
+       <!-- 상품추가 -->
+		<insert id="AddProduct">
+insert into g3_product(p_name, p_category, p_option, p_price, p_amount, p_content, p_image, p_thumbimg, p_date,ship_date, p_return_fee)
+		values(#{p_name}, #{p_category}, #{p_option}, #{p_price},#{p_amount}, #{p_content}, #{p_image},#{p_thumbimg}, now(),#{ship_date}, #{p_return_fee})
+		</insert>
+	
+	
+	<!-- 상품조회 -->
+		<select id="getProduct" resultType="com.g3.domain.Ad_ProductVO">
+		select * from g3_product 
+		where p_num=#{p_num}
+		</select>
+	
+	<!-- 상품 수정 (p_date의 수정이 필요함)--> 
+		<update id="modifyProduct">
+	     update g3_product 
+	     set p_name=#{p_name}, p_category=#{p_category}, p_option=#{p_option}, p_price=#{p_price},p_amount=#{p_amount}, p_content=#{p_content},ship_date=#{ship_date}, p_return_fee=#{p_return_fee}	
+		 where p_num=#{p_num}
+		</update>
+	
+	<!-- 상품 삭제  -->
+	   <delete id="deleteProduct">
+	      delete from g3_product
+	      where p_num=#{p_num}
+	   </delete>
+    <!-- 게시물 총 갯수 -->
+		<select id="count" resultType="int">
+		 select count(p_num) from g3_product
+		</select>
+   
+
+<!--       게시물 목록 + 페이징+검색기능 -->
+		<select id="listPageSearch" parameterType="hashMap" resultType="com.g3.domain.Ad_ProductVO">
+		 select
+		  p_num,p_name,p_category,p_price,p_amount,p_date
+		 from g3_product
+		 
+		 <if test='searchType.equals("p_name")'>
+		  WHERE p_name LIKE concat('%', #{keyword}, '%')
+		 </if>
+		 
+		 <if test='searchType.equals("p_content")'>
+		  WHERE p_content LIKE concat('%', #{keyword}, '%')
+		 </if>
+		 
+		 <if test='searchType.equals("productname_content")'>
+		  WHERE p_name LIKE concat('%', #{keyword}, '%') 
+		   or p_content LIKE concat('%', #{keyword}, '%')
+		 </if>
+		 
+ 
+		 order by p_num desc
+		  limit #{displayPost}, #{postNum}
+		</select>
+		
+		
+		<!-- 게시물 총 갯수 + 검색 적용 -->
+		<select id="searchCount" parameterType="hashMap" resultType="int">
+		 select count(p_num) from g3_product 
+		  
+		 <if test='searchType.equals("p_name")'>
+		  WHERE p_name LIKE concat('%', #{keyword}, '%')
+		 </if>
+		 
+		 <if test='searchType.equals("p_content")'>
+		  WHERE p_content LIKE concat('%', #{keyword}, '%')
+		 </if>
+		 
+		 <if test='searchType.equals("productname_content")'>
+		  WHERE p_name LIKE concat('%', #{keyword}, '%') 
+		   or p_content LIKE concat('%', #{keyword}, '%')
+		 </if>
+		 
+		</select>
+
+
+		
+		
+</mapper>
