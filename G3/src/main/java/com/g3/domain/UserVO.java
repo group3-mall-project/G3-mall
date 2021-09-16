@@ -9,9 +9,9 @@ public class UserVO {
 	private String u_phone;
 	private String u_address;
 	private String u_gender;
-	private String u_birth;
+	private int u_birth;
 	private String u_like;
-	private String joindate;
+	private Timestamp joindate;
 	public String getU_id() {
 		return u_id;
 	}
