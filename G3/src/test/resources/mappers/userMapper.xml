@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.g3.mapper.UserMapper">
+	
+	<!-- 회원 가입 -->
+	<select id="insertUser">
+		insert into g3_user (u_id,u_pw,u_name,u_email,u_phone,u_address,u_gender,u_birth,joindate)
+		values(#{u_id},#{u_pw},#{u_name},#{u_email},#{u_phone},#{u_address},#{u_gender},#{u_birth},now())
+	</select>
+	
+	<!-- 로그인 -->
+	<select id="loginUser" resultType="com.g3.domain.UserVO">
+		select * from g3_user
+		where u_id = #{u_id} and u_pw = #{u_pw}
+	</select>
+	
+	<!-- 사용자 회원 정보 --><!-- resultType은 리턴 할게 있을시 적는다 -->
+	<select id="getUser" resultType="com.g3.domain.UserVO">
+		select * from g3_user
+		where u_id = #{u_id}
+	</select>
+	
+	<!-- 회원정보 수정 -->
+	<update id="updateUser">
+		update g3_user set u_pw = #{u_pw}, u_name = #{u_name}, u_phone = #{u_phone}, u_address = #{u_address}
+		where u_id = #{u_id}
+	</update>
+	
+	<!-- 회원 탈퇴 -->
+	<delete id="deleteUser">
+		delete from g3_user
+		where u_id = #{u_id} and u_pw = #{u_pw}
+	</delete>
+	
+	<!-- 아이디 유효성 검사 -->
+	<select id="u_idCheck" resultType="string">
+		select u_id from g3_user
+		where u_id = #{u_id}
+	</select>
+	
+	<!-- ID 찾기 DB에 이메일이 있는지 확인하기 -->
+	<select id="getEmail" resultType="com.g3.domain.UserVO">
+		select  u_id, u_email from g3_user 
+		where u_email = #{u_email}
+	</select>
+	
+	<!-- PW이메일로 보내주기 id,email맞는지 확인 -->
+	<select id="checkFindPw" resultType="com.g3.domain.UserVO">
+		select u_email from g3_user 
+		where u_id = #{u_id} and u_email = #{u_email}
+	</select>
+	
+	<!-- 임시비밀번호 변경 -->
+	<update id="updatePw">
+		update g3_user set u_pw = #{u_pw} 
+		where u_id = #{u_id} and u_email = #{u_email}
+	</update>
+	
+	
+	
+</mapper>
+  
+  
+  
