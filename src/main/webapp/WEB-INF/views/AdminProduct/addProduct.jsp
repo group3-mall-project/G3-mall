@@ -42,10 +42,11 @@
    resize_enaleb : false,
    enterMode : CKEDITOR.ENTER_BR,
    shiftEnterMode : CKEDITOR.ENTER_P,
-   filebrowserUploadUrl : "${pageContext.request.contextPath}/AdminProduct/ckUpload"
+   filebrowserUploadUrl : "../AdminProduct/ckUpload"
  };
  
  CKEDITOR.replace("p_content", ckeditor_config);
+ 
 // $(function(){
 // 	CKEDITOR.replace('p_content',{
 // 	filebrowserUploadUrl : '${pageContext.request.contextPath}/AdminProduct/ckUpload'
