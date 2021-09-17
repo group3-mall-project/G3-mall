@@ -54,10 +54,10 @@ public class UserVO {
 	public void setU_gender(String u_gender) {
 		this.u_gender = u_gender;
 	}
-	public String getU_birth() {
+	public int getU_birth() {
 		return u_birth;
 	}
-	public void setU_birth(String u_birth) {
+	public void setU_birth(int u_birth) {
 		this.u_birth = u_birth;
 	}
 	public String getU_like() {
@@ -66,10 +66,10 @@ public class UserVO {
 	public void setU_like(String u_like) {
 		this.u_like = u_like;
 	}
-	public String getJoindate() {
+	public Date getJoindate() {
 		return joindate;
 	}
-	public void setJoindate(String joindate) {
+	public void setJoindate(Date joindate) {
 		this.joindate = joindate;
 	}
 	@Override
