@@ -120,29 +120,26 @@ public class AdProductController {
 	  byte[] bytes = upload.getBytes();
 	  
 	  // 업로드 경로
-	//  String ckUploadPath = "${pageContext.request.contextPath}/AdminProduct/ckUpload"+ uid + "_" + fileName;
-//	  String ckUploadPath = uploadPath+"\\ckUpload\\"+uid + "_" + fileName;
-//	  String ckUploadPath = req.getServletContext().getRealPath("/")+"/resources/ckUpload"+uid + "_" + fileName;
-//	  String ckUploadPath = uploadPath + File.separator + "ckUpload" + File.separator + uid + "_" + fileName;
-//	  out = new FileOutputStream(new File(ckUploadPath));
+	  String ckUploadPath = uploadPath + File.separator + "ckUpload" + File.separator + uid + "_" + fileName;
+	  System.out.println(ckUploadPath);
+	  out = new FileOutputStream(new File(ckUploadPath));
 	  out.write(bytes);
 	  out.flush(); // out에 저장된 데이터를 전송하고 초기화
 	  
 	  String callback = req.getParameter("CKEditorFuncNum");
 	  printWriter = res.getWriter();
-	  String fileUrl = "/ckUpload/" + uid + "_" + fileName; // 작성화면
+	  String fileUrl = "../ckUpload/" + uid + "_" + fileName; // 작성화면
 	  
-	  json.addProperty("uploaded", 1);
-	  json.addProperty("fileName", fileName);
-	  json.addProperty("url", fileUrl);
-	  printWriter.println(json);
+//	  json.addProperty("uploaded", 1);
+//	  json.addProperty("fileName", fileName);
+//	  json.addProperty("url", fileUrl);
+//	  json.addProperty("ckUploadPath", ckUploadPath);
+//	  printWriter.println(json);
 	  
 	  // 업로드시 메시지 출력
-//	  printWriter.println("<script type='text/javascript'>"
-//			     + "window.parent.CKEDITOR.tools.callFunction("
-//			     + callback+",'"+ fileUrl+"','이미지를 업로드하였습니다.')"
-//			     +"</script>");
-//	  printWriter.flush();
+	  printWriter.println("{\"filename\" : \""+fileName+"\", \"uploaded\" : 1, \"url\":\""+fileUrl+"\"}");
+	  
+
 	  
 	 } catch (IOException e) { e.printStackTrace();
 	 } finally {
