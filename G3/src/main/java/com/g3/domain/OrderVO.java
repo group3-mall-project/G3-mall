@@ -6,6 +6,8 @@ public class OrderVO {
 	// 주문테이블
 	private int o_num; // 주문 테이블번호
 	
+	
+	
 	// 주문정보
 	private String o_d_num; // 주문번호
 	private int o_p_num; // 주문한 상품번호
@@ -14,11 +16,15 @@ public class OrderVO {
 	private String o_p_option; // 주문한 상품옵션
 	private String u_id; // 주문한 아이디
 	
+	
+	
 	// 배송정보
 	private String o_d_name; // 배송받는 사람이름
 	private String o_d_add; // 배송받는 주소
 	private String o_d_phone; // 배송받는 전화번호
 	private String o_d_msg; // 배송 메세지
+	
+	
 	
 	// 결제정보
 	private int o_sum_money; // 총 결제금액
@@ -26,10 +32,14 @@ public class OrderVO {
 	private String o_acc_payer; // 결제하는 사람
 	private Date o_acc_date; // 결제하는 날짜
 	
+	
+	
 	// 운송장정보
 	private String o_way_num; // 운송장 번호
 	private Date o_date; // 주문날짜
 	private int o_status; // 주문상태
+	
+	
 	
 	public int getO_num() {
 		return o_num;
@@ -140,6 +150,8 @@ public class OrderVO {
 		this.o_status = o_status;
 	}
 	
+	
+	
 	@Override
 	public String toString() {
 		return "OrderVO [o_num=" + o_num + ", o_d_num=" + o_d_num + ", o_p_num=" + o_p_num + ", o_p_name=" + o_p_name
@@ -149,5 +161,4 @@ public class OrderVO {
 				+ ", o_acc_date=" + o_acc_date + ", o_way_num=" + o_way_num + ", o_date=" + o_date + ", o_status="
 				+ o_status + "]";
 	}
-
 }
