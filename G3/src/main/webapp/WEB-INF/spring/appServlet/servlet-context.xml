@@ -21,7 +21,8 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="com.g3.web" />
+	<context:component-scan base-package="com.g3.controller" />
+	<context:component-scan base-package="com.g3.exception" />
 	
 	
 	
