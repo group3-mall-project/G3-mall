@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
 	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
@@ -19,7 +19,7 @@
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<!--<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>-->
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
-		<property name="url" value="jdbc:mysql://localhost:3306/dummy?useSSL=false&amp;serverTimezone=Asia/Seoul"/>
+		<property name="url" value="jdbc:mysql://localhost:3306/g3?useSSL=false&amp;serverTimezone=Asia/Seoul"/>
 		<property name="username" value="root"/>
 		<property name="password" value="1234"/>
 	</bean>
@@ -30,15 +30,15 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="configLocation" value="classpath:/mybatis-config.xml"></property>
-				<!-- classpath:/주소는 src/main.resources 폴더를 의미 -->
-				
-		<!-- MaBatis와 Mapper 연결 -->
-		<property name="mapperLocations" value="classpath:/mappers/**/*Mapper.xml"></property>
+		<!-- classpath:/주소는 src/main.resources 폴더를 의미한다. -->
+		
+		<!-- MaBatis와 Mapper를 연결 -->
+		<property name="mapperLocations" value="classpath:mappers/**/*Mapper.xml"></property>
 	</bean>
-	<!-- sqlSessionFactroy 객체: MyBatis와 스프링 연동(연결정보, SQL 실행) -->
-	
-	
-	<!-- sqlSesison 객체 -->
+   <!-- sqlSessionFactory 객체 : Mybatis와 스프링의 연동(연결정보, SQL실행)-->
+
+
+	<!-- SqlSession 객체 -->        
 	<bean id="sqlSession" 
 		  class="org.mybatis.spring.SqlSessionTemplate" 
 		  destroy-method="clearCache">
@@ -46,8 +46,18 @@
 	</bean>	
 	<!-- sqlSesison 객체 -->	
 	
-	<!-- root-context 파일에서 패키지 정보를 읽어서 객체정보 파악 -->
-	<context:component-scan base-package="com.g3.persistence"></context:component-scan>
-	<context:component-scan base-package="com.g3.service"></context:component-scan>
+	</bean>
+	<!-- SqlSession 객체 -->  
+	
+	<!-- root-context 파일에서 패키지 정보를 읽어온다. (객체정보를 가져옴) -->
+	<context:component-scan base-package="com.g3.persistence">
+	</context:component-scan>      
+	
+	<context:component-scan base-package="com.g3.service">
+	</context:component-scan>      
+	
+	<context:component-scan base-package="com.g3.utils">
+	</context:component-scan> 
+	
 	
 </beans>
