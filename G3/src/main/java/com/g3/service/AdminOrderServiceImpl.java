@@ -118,33 +118,31 @@ public class AdminOrderServiceImpl implements AdminOrderService {
 	
 	// 주문검색
 	@Override
-	public List<OrderVO> getListOfSearchOrder(OrderSearchVO osvo, Integer beginNumOfOrders, Integer numOfItemsPerPage) {
-		List<OrderVO> listOrderSearch;
+	public List<OrderVO> getListOfOrderSearch(OrderSearchVO osvo, Criteria cri) {
+		List<OrderVO> listOfOrderSearch;
 		
-		System.out.println("Business(Service): Persistence(DAO) getListOfSearchOrder(OrderSearchVO osvo, Integer beginNumOfOrders, Integer numOfItemsPerPage) 호출\n");
+		System.out.println("Business(Service): Persistence(DAO) getListOfOrderSearch(OrderSearchVO osvo, Criteria cri) 호출\n");
 		
-		listOrderSearch = aodao.getListOfSearchOrder(osvo, beginNumOfOrders, numOfItemsPerPage);
+		listOfOrderSearch = aodao.getListOfOrderSearch(osvo, cri);
 		
 		System.out.println("Business(Service): 주문검색 완료\n");
 		
-		return listOrderSearch;
+		return listOfOrderSearch;
 	}
 	// 주문검색
 	
-	
-	
 	// 주문검색 개수
 	@Override
-	public Integer getNumOfSearchOrder(OrderSearchVO osvo) {
-		Integer numOfSearchOrder;
+	public Integer getNumOfOrderSearch(OrderSearchVO osvo) {
+		Integer numOfOrderSearch;
 		
-		System.out.println("Business(Service): Persistence(DAO) getNumOfSearchOrder(OrderSearchVO osvo) 호출\n");
+		System.out.println("Business(Service): Persistence(DAO) getNumOfOrderSearch(OrderSearchVO osvo) 호출\n");
 		
-		numOfSearchOrder = aodao.getNumOfSearchOrder(osvo);
+		numOfOrderSearch = aodao.getNumOfOrderSearch(osvo);
 		
 		System.out.println("Business(Service): 주문검색 개수 완료\n");
 		
-		return numOfSearchOrder;
+		return numOfOrderSearch;
 	}
 	// 주문검색 개수
 
@@ -164,12 +162,10 @@ public class AdminOrderServiceImpl implements AdminOrderService {
 		return trackingNumber;
 	}
 	// 중복되지 않는 운송장 번호생성
-	
 
-	
 	// 운송장 번호
 	@Override
-	public String getTrackingNumber(Integer o_d_num) {
+	public String getTrackingNumber(String o_d_num) {
 		String trackingNumber;
 		
 		System.out.println("Business(Service): Persistence(DAO) geTrackingNumber() 호출\n");
@@ -182,11 +178,9 @@ public class AdminOrderServiceImpl implements AdminOrderService {
 	}
 	// 운송장 번호
 	
-
-	
 	// 운송장 번호부여
 	@Override
-	public void addTrackingNumber(Integer o_d_num, String o_way_num) {
+	public void addTrackingNumber(String o_d_num, String o_way_num) {
 		System.out.println("Business(Service): Persistence(DAO) addTrackingNumber() 호출\n");
 		
 		aodao.addTrackingNumber(o_d_num, o_way_num);
@@ -199,7 +193,7 @@ public class AdminOrderServiceImpl implements AdminOrderService {
 
 	// 주문 상세정보
 	@Override
-	public List<OrderVO> getOrderDetail(Integer o_d_num) {
+	public List<OrderVO> getOrderDetail(String o_d_num) {
 		List<OrderVO> listOrderDetail;
 		
 		System.out.println("Business(Service): Persistence(DAO) getOrderDetail(Integer o_d_num) 호출\n");
@@ -212,8 +206,6 @@ public class AdminOrderServiceImpl implements AdminOrderService {
 	}
 	// 주문 상세정보
 
-
-
 	// 주문 상세정보 수정
 	@Override
 	public void editOrderDetail(OrderVO ovo) {
@@ -225,11 +217,9 @@ public class AdminOrderServiceImpl implements AdminOrderService {
 	}
 	// 주문 상세정보 수정
 
-
-	
 	// 주문취소
 	@Override
-	public void cancelOrder(Integer o_d_num) {	
+	public void cancelOrder(String o_d_num) {	
 		System.out.println("Business(Service): Persistence(DAO) cancelOrder(Integer o_d_num) 호출\n");
 	
 		aodao.cancelOrder(o_d_num);

@@ -6,7 +6,7 @@ public class PageVO {
 	private int endNumOfPage; // 끝 페이지 번호
 	private boolean pre, nxt; // 이전, 다음
 	private int numOfItems; // 전체 항목의 개수
-	private int numOfPagesPerPage = 1;// 페이지 당 표시할 페이지 번호의 개수
+	private int numOfPagesPerPage = 5;// 페이지 당 표시할 페이지 번호의 개수
 	
 	
 	

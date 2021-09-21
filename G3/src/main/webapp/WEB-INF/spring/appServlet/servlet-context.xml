@@ -23,7 +23,4 @@
 	
 	<context:component-scan base-package="com.g3.controller" />
 	<context:component-scan base-package="com.g3.exception" />
-	
-	
-	
 </beans:beans>

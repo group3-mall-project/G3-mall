@@ -22,8 +22,8 @@
 			</tr>
 			<tr>
 				<td>${ovo.o_sum_money }</td>
-				<td>${ovo.o_p_num }</td>
-				<td>${ovo.o_p_amount }</td>
+				<td>${ovo.o_year}</td>
+				<td>${ovo.o_month }</td>
 			</tr>
 		</table>
 	</c:forEach>

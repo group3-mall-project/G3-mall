@@ -17,7 +17,10 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 			var fr = $("#orderDetailForm");
-			
+			var backDest = "${backDest }";
+			var currentPageNum = "${currentPageNum }";
+			var u_id = "${u_id}";
+
 			$("#editOrder").click(function(){
 				fr.attr("action", "./orderDetailEdit");
 				fr.attr("method", "get");
@@ -31,7 +34,9 @@
 			});
 			
 			$("#goBack").click(function(){
-				history.back();
+				if(backDest === "allUsersOrdersOutput") self.location = "./allUsersOrdersOutput?currentPageNum="+currentPageNum;
+				else if(backDest === "singleUserOrdersOutput") self.location = "./singleUserOrdersOutput?currentPageNum="+currentPageNum+"&u_id="+u_id;
+				else self.location = "./orderSearchOutput?currentPageNum="+currentPageNum;
 			});
 		});
 	</script>
@@ -41,9 +46,12 @@
 	<h2>주문 상세정보(AdminOrderController)</h2>
 	
 	<form action="" id="orderDetailForm" method="post">
-		<c:set var="ovo1st" value="${listOrderDetail.get(0) }"/>
+		<c:set var="ovo1st" value="${listOfOrderDetail.get(0) }"/>
 		
 		<input type="hidden" name="o_d_num" value="${ovo1st.o_d_num }"> 
+		<input type="hidden" name="backDest" value="${backDest }"> 
+		<input type="hidden" name="currentPageNum" value="${currentPageNum }"> 
+		<input type="hidden" name="u_id" value="${u_id }"> 
 				
 		<table border="1">
 			<tr>

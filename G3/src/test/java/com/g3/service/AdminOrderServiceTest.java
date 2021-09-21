@@ -204,7 +204,7 @@ public class AdminOrderServiceTest {
 		}
 	}
 	// 주문검색
-	*/
+	
 	
 	// 운송장 번호부여
 	@Test
@@ -218,5 +218,6 @@ public class AdminOrderServiceTest {
 		// 운송장 번호 부여
 		aoservice.addTrackingNumber(12, trackingNumber);
 	}
+	*/
 	// 운송장 번호부여
 }

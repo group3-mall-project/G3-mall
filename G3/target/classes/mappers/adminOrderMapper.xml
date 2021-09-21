@@ -6,7 +6,7 @@
 <mapper namespace="com.g3.mapper.AdminOrderMapper"> 
 	<!-- 주문조회 -->
 	<select id="getListOfOrders" parameterType="map" resultType="OrderVO">
-		select o_d_num, o_acc_date, o_p_name, o_p_amount, sum(o_sum_money) as o_sum_money, o_status, u_id, o_d_name, o_d_add, o_way_num
+		select o_d_num, o_acc_date, o_p_name, o_p_num, o_p_amount, sum(o_sum_money) as o_sum_money, o_status, u_id, o_d_name, o_d_add, o_way_num
 	    from ord
 	    <if test='u_id == "admin"'>
 	    	where u_id != #{u_id}
@@ -21,7 +21,7 @@
 	<!-- 주문조회 -->	
 	
 	<!-- 주문개수 -->
-	<select id="getNumOfOrders" parameterType="String" resultType="integer">
+	<select id="getNumOfOrders" parameterType="string" resultType="integer">
 		select sum(o_d_num)
 		from(
 			select count(distinct(o_d_num)) as o_d_num
@@ -61,7 +61,7 @@
 	
 	<!-- 월별정산 -->
 	<select id="getListOfMonthlySumTotal" resultType="OrderVO">
-	  	select year(o_acc_date) as o_p_num, month(o_acc_date) as o_p_amount, sum(o_sum_money) as o_sum_money
+	  	select year(o_acc_date) as o_year, month(o_acc_date) as o_month, sum(o_sum_money) as o_sum_money
 	  	from ord
 	  	group by year(o_acc_date), month(o_acc_date)
 	  	order by year(o_acc_date) desc, month(o_acc_date) desc
@@ -80,19 +80,19 @@
 	
 	<!-- 주문검색 -->
 	<select id="getListOfSearchOrder" resultType="OrderVO">
-		select *
+		select o_d_num, o_acc_date, o_p_name, o_p_num, o_p_amount, sum(o_sum_money) as o_sum_money, o_status, u_id, o_d_name, o_d_add, o_way_num
 		from ord
 		where o_acc_date between #{o_begin_date} and #{o_end_date}
 		<choose>
-			<when test='o_srch_cond == "receiverName"'>and o_d_name = #{o_srch_qy}</when>
-			<when test='o_srch_cond == "payerId"'>and u_id = #{o_srch_qy}</when>
-			<when test='o_srch_cond == "orderNumber"'>and o_d_num = #{o_srch_qy}</when>
-			<when test='o_srch_cond == "productNumber"'>and o_p_num = #{o_srch_qy}</when>
+			<when test='o_srch_type == "receiverName"'>and o_d_name = #{o_srch_qy}</when>
+			<when test='o_srch_type == "payerId"'>and u_id = #{o_srch_qy}</when>
+			<when test='o_srch_type == "orderNumber"'>and o_d_num = #{o_srch_qy}</when>
+			<when test='o_srch_type == "productNumber"'>and o_p_num = #{o_srch_qy}</when>
 			<otherwise>and o_way_num = #{o_srch_qy}</otherwise>
 		</choose>
-		group by o_d_num
-		order by o_d_num desc
-		limit #{beginNumOfItems}, #{numOfItemsPerPage}
+		group by o_d_num <!-- o_d_num -->
+		order by o_d_num desc <!-- o_d_num desc -->
+		limit #{cri.beginNumOfItems}, #{cri.numOfItemsPerPage}
 	</select>
 	<!-- 주문검색 -->
 	
@@ -104,14 +104,14 @@
 			from ord
 			where o_acc_date between #{o_begin_date} and #{o_end_date}
 			<choose>
-				<when test='o_srch_cond == "receiverName"'>and o_d_name = #{o_srch_qy}</when>
-				<when test='o_srch_cond == "payerId"'>and u_id = #{o_srch_qy}</when>
-				<when test='o_srch_cond == "orderNumber"'>and o_d_num = #{o_srch_qy}</when>
-				<when test='o_srch_cond == "productNumber"'>and o_p_num = #{o_srch_qy}</when>
+				<when test='o_srch_type == "receiverName"'>and o_d_name = #{o_srch_qy}</when>
+				<when test='o_srch_type == "payerId"'>and u_id = #{o_srch_qy}</when>
+				<when test='o_srch_type == "orderNumber"'>and o_d_num = #{o_srch_qy}</when>
+				<when test='o_srch_type == "productNumber"'>and o_p_num = #{o_srch_qy}</when>
 				<otherwise>and o_way_num = #{o_srch_qy}</otherwise>
 			</choose>
-			group by o_d_num
-			order by o_d_num desc
+			group by o_d_num <!-- o_d_num -->
+			order by o_d_num desc <!-- o_d_num desc -->
 		)as R
 	</select>
 	<!-- 주문검색 개수 -->
