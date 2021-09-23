@@ -24,14 +24,18 @@ public interface UserDAO {
 	// 아이디 유효성 검사
 	public String u_idCheck(String u_id);
 	
+	// 이메일 중복 유효성 검사
+	public String u_emailCheck(String u_email);
+	
 	// ID 찾기 DB에 이메일이 있는지 확인하기
-	public UserVO getEmail(String u_email);
+	public String getEmail(String u_email);
 	
 	// PW이메일로 보내주기 id,email맞는지 확인
-	public UserVO findPw(UserVO vo);
+	public String findPw(UserVO vo);
 	
 	// PW를 난수로 바꿔서 저장
 	public void updatePw(UserVO vo);
 	
 	
 }
+
