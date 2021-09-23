@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.g3.mapper.BoardMapper">
+
+	<insert id="insertBoard">
+		insert into g3_board(u_id,bo_category,bo_p_rating,bo_subject,bo_content,bo_readcount,bo_re_ref,bo_re_seq,bo_updatedate, bo_p_image, bo_p_thumbImg)  
+		value(#{u_id},#{bo_category},#{bo_p_rating},#{bo_subject},#{bo_content},0,#{bo_re_ref}+1,0,now(),#{bo_p_image},#{bo_p_thumbImg})
+	</insert>
+	
+	
+	<select id="maxBo_num" resultType="String">
+		select max(bo_num)
+		from g3_board
+	</select>
+	
+	<select id="bo_re_seq" resultType="String">
+		select bo_re_seq
+		from g3_board
+		where bo_num = #{bo_num}
+	</select>
+	
+	<select id="bo_re_ref" resultType="String">
+		select bo_re_ref
+		from g3_board
+		where bo_num = #{bo_num}
+	</select>
+	
+	<delete id="deleteContent">
+		delete from g3_board
+		where bo_num = #{bo_num}
+	
+	</delete>
+	
+	<select id="getBoardList" resultType="com.g3.domain.BoardVO">
+		select * 
+		from g3_board
+		order by bo_re_ref desc, bo_re_seq asc
+	</select>
+	
+	<select id="getCategoryBoardList" resultType="com.g3.domain.BoardVO">
+		select * 
+		from g3_board
+		where bo_category = #{bo_category}
+		order by bo_num desc
+	</select>
+	
+	<select id="getBoardContent" resultType="com.g3.domain.BoardVO">
+		select * 
+		from g3_board
+		where bo_num = #{bo_num}
+		
+	</select>
+	
+	<update id="reWriteupdate">
+		update g3_board set bo_re_seq = bo_re_seq+1 
+		where bo_re_ref=#{bo_re_ref} and bo_re_seq>#{bo_re_seq}
+	</update>
+	
+	<insert id="reWriteBoard">
+		insert into g3_board(u_id,bo_category,bo_subject,bo_content,bo_readcount,bo_re_ref,bo_re_seq,bo_updatedate) 
+		value(#{u_id},#{bo_category},#{bo_subject},#{bo_content},0,#{bo_re_ref},#{bo_re_seq}+1,now())
+	</insert>
+	
+	
+	<update id="modify">
+		update g3_board set bo_subject= #{bo_subject}, bo_p_rating = #{bo_p_rating}, bo_content = #{bo_content}, bo_updatedate = now(),bo_p_image = #{bo_p_image}, bo_p_thumbImg = #{bo_p_thumbImg}
+		where bo_num = #{bo_num}
+	</update>
+	
+	
+	
+	
+	
+</mapper>
