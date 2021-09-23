@@ -7,11 +7,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+
 <title>Join</title>
 
 <script type="text/javascript">
-
+	var id_Check = false;
+	var email_Check = false;
+	
+	
+	// 비밀번호 재확인
 	function u_pwCheck() {
 		var u_pw = document.doc.u_pw.value;
 		var irmPassword = document.doc.irmPassword.value;
@@ -28,46 +32,57 @@
 		
 	}
 	
+	// 이메일 유효성 검사 및 인증
 	function u_emailSend() {
 		var u_email = document.doc.u_email.value;
-		console.log("이메일"+u_email);
-		if(u_email == null){
-			document.doc.certBtn.focus();
-		}else if(u_email != null){
-			window.open("./emailCert?u_email="+u_email,'Email 인증요청','width=500, height=400, menubar=no, status=no, toolbar=no');
-		}
-	}
-	
-	
-	
-	
-	function u_idCheck() {
-		var u_id = document.doc.u_id.value;
-		
-		console.log("u_아이디"+u_id+data);
 		
 		$.ajax({
-			type: "post",
-			url: "./idCheck",
-			data: ({
-				u_id: document.doc.u_id.value
+			type: 'post',
+			url: './emailCheck',
+			data:({
+				u_email: $("#u_email").val()
 			}),
-			success: function (${result}) {
-				console.log("result : "+${result});
+			success: function (echeck) {
 				
-				var u_id = document.doc.u_id.value;
-				if (${result} != u_id) {
-					console.log("u_id : "+u_id);
-					console.log("result : "+${result});
-					$("#idCheck").html("사용가능한 아이디입니다.");
-					$("#idCheck").css("color", "green");
-					idt = true;
-				}else if(${result} == u_id){
-					console.log("u_id : "+u_id);
-					console.log("result : "+${result});
-					$("#idCheck").html("이미 사용중인 아이디입니다.");
-					$("#idCheck").css("color", "red"); 
-					idt = false;
+				if (echeck != u_email) {
+					console.log("이메일 유효성: "+echeck);
+					console.log("이메일 유효성이메: "+u_email);
+					$("#u_emailCheck").html("사용 가능한 이메일입니다.");
+					$("#u_emailCheck").css("color", "green");
+					window.open("./emailCert?u_email="+u_email,'Email 인증요청','width=500, height=400, menubar=no, status=no, toolbar=no');
+					email_Check = true;
+				}else if(echeck == u_email){
+					console.log("이메일 유효성: "+echeck);
+					console.log("이메일 유효이쿠: "+u_email);
+					$("#u_emailCheck").html("사용 불가능한 이메일 입니다.");
+					$("#u_emailCheck").css("color", "red");
+					email_Check = false;
+				}
+			}
+			
+		});
+	}
+	
+ 	function u_idCheck() {
+ 		var u_id = document.doc.u_id.value;
+		
+		$.ajax({
+			type: 'post',
+			url: './idCheck',
+			data:({
+					u_id: $("#u_id").val()
+				}),
+			 
+			success: function (result) {
+				
+				if (result != u_id) {
+					$("#u_idCheck").html("사용가능한 아이디입니다.");
+					$("#u_idCheck").css("color", "green");
+					id_Check = true;
+				}else if(result == u_id){
+					$("#u_idCheck").html("이미 사용중인 아이디입니다.");
+					$("#u_idCheck").css("color", "red"); 
+					id_Check = false;
 				}
 			}
 		});
@@ -96,11 +111,12 @@
 			document.doc.u_id.focus();
 			return false;
 		}
-		if( u_pw == 0 ){
-			alert("비밀번호을 입력하세요");
+		if( u_pw < 7 || u_pw >17 ){
+			alert("비밀번호는 8~16자리 사이로 입력하세요");
 			document.doc.u_pw.focus();
 			return false;	
 		}
+		
 		if( irmPassword == 0  ){
 			alert("비밀번호를  확인하세요");
 			document.doc.irmPassword.focus();
@@ -137,9 +153,16 @@
 			document.doc.u_phone.focus();
 			return false;
 		}
+		
 		if (document.doc.u_birth.value.length== 0) {
 			alert("생일을 입력하세요");
 			document.doc.u_birth.focus();
+			return false;
+		}
+		
+		if (email_Check == true && id_Check == true) {
+			$("#doc").submit();
+		}else{
 			return false;
 		}
 		
@@ -204,11 +227,11 @@
 
 	 <fieldset class="join">
 	 <legend> JOIN </legend>
-	 <form action="./join" method="post" name= "doc" onsubmit="return fun1();" id="doc">
+	 <form action="./join" method="post" name= "doc" id="doc">
 	 
 	 <label>아이디</label>
-	 <input type="text" name="u_id" placeholder="아이디" onblur="u_idCheck();" required><br>
-	 <span id="u_idCheck"></span>
+	 <input type="text" name="u_id" id="u_id" placeholder="아이디" onblur="u_idCheck();" required><br>
+	 <span id="u_idCheck"></span><br>
 	 
 	 
 	 <label>비밀번호</label>
@@ -228,8 +251,8 @@
 	 <!-- <input type="text" name="addr3" id="addr3" placeholder="상세주소" required><br> -->
 	  
 	 <label>이메일</label>
-	 <input type="email" name="u_email" id="u_email" placeholder="email" required>
-	 <input type="button" name="certBtn" id="certBtn" value="메일인증" onclick="u_emailSend();"><br>
+	 <input type="email" name="u_email" id="u_email" placeholder="email" required >
+	 <input type="button" name="certBtn" id="certBtn" value="메일인증" onclick="u_emailSend();">
 	 <span id="u_emailCheck"></span><br>
 	 
 	<label>전화번호</label>
@@ -245,7 +268,7 @@
  	
  	
  	 <hr>
- 	 <input type="submit" value="회원가입">
+ 	 <input type="button" value="회원가입" onclick="fun1()">
  	 <input type="reset" value="초기화">		
   </form>
  </fieldset>
