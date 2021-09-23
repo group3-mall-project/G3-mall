@@ -25,9 +25,9 @@
 
 	function findUserId() {
 		
-		var check ='${vo.u_email}';
-		console.log("이메일"+check);
-		if (check == null) {
+		var u_id ='${u_id}';
+		console.log("이메일"+u_id);
+		if (u_id == null) {
 			alert("존재하지 않는 이메일입니다.");
 			return false;
 		}else{
