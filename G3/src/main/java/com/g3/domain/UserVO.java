@@ -1,5 +1,7 @@
 package com.g3.domain;
 
+import java.util.Date;
+
 public class UserVO {
 	
 	private String u_id;
@@ -9,7 +11,7 @@ public class UserVO {
 	private String u_phone;
 	private String u_address;
 	private String u_gender;
-	private int u_birth;
+	private String u_birth;
 	private String u_like;
 	private Date joindate;
 	public String getU_id() {
@@ -54,10 +56,10 @@ public class UserVO {
 	public void setU_gender(String u_gender) {
 		this.u_gender = u_gender;
 	}
-	public int getU_birth() {
+	public String getU_birth() {
 		return u_birth;
 	}
-	public void setU_birth(int u_birth) {
+	public void setU_birth(String u_birth) {
 		this.u_birth = u_birth;
 	}
 	public String getU_like() {
@@ -78,5 +80,6 @@ public class UserVO {
 				+ u_phone + ", u_address=" + u_address + ", u_gender=" + u_gender + ", u_birth=" + u_birth + ", u_like="
 				+ u_like + ", joindate=" + joindate + "]";
 	}
+	
 	
 }
