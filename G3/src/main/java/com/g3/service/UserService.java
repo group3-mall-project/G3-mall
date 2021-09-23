@@ -1,9 +1,5 @@
 package com.g3.service;
 
-import java.net.Authenticator;
-
-import javax.mail.PasswordAuthentication;
-
 import com.g3.domain.UserVO;
 
 public interface UserService {
@@ -29,6 +25,9 @@ public interface UserService {
 	// 아이디 유효성 검사
 	public String u_idCheck(String u_id);
 	
+	// 이메일 유효성 검사
+	public String u_emailCheck(String u_email);
+	
 	// 이메일 인증에 필요한 난수6자리
 	public String createCertNum();
 	
@@ -36,13 +35,13 @@ public interface UserService {
 	public boolean emailCertSend(String u_email, String certNum);
 	
 	// ID 찾기 DB에 이메일이 있는지 확인하기
-	public UserVO confirmEmail(String u_email); 
+	public String confirmEmail(String u_email); 
 	
 	// ID이메일로 보내주기
 	public void sendId(String u_id, String u_email);
 	
 	// PW이메일로 보내주기 id,email맞는지 확인
-	public UserVO findUserPw(UserVO vo);
+	public String findUserPw(UserVO vo);
 	
 	// PW를 난수로 바꿔서 저장
 	public void updatePw(UserVO vo);
@@ -51,7 +50,13 @@ public interface UserService {
 	public String createPw();
 	
 	// 변경된 비밀번호 보내기
-	public void sendPw(String u_id,String u_email, String createPw);
+	public void sendPw(String u_email, String createPw);
+	
+	// 아래부터는 네이버 로그인에 필요한 것들
+	
+	
+	
+	
 	
 	
 }
