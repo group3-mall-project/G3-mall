@@ -29,33 +29,25 @@ public interface AdminOrderService {
 	
 	
 	// 주문검색
-	public List<OrderVO> getListOfSearchOrder(OrderSearchVO osvo, Integer beginNumOfItems, Integer numOfItemsPerPage);
-	
-	
+	public List<OrderVO> getListOfOrderSearch(OrderSearchVO osvo, Criteria cri);
 	// 주문검색 개수
-	public Integer getNumOfSearchOrder(OrderSearchVO osvo);	
+	public Integer getNumOfOrderSearch(OrderSearchVO osvo);	
+	
 	
 	
 	// 중복되지 않는 운송장 번호생성
 	public String generateUniqueTrackingNumber();
-	
-	
 	// 운송장 번호
-	public String getTrackingNumber(Integer o_d_num);
-	
-	
+	public String getTrackingNumber(String o_d_num);
 	// 운송장 번호부여
-	public void addTrackingNumber(Integer o_d_num, String o_way_num);
+	public void addTrackingNumber(String o_d_num, String o_way_num);
+	
 	
 	
 	// 주문 상세정보
-	public List<OrderVO> getOrderDetail(Integer o_d_num);
-	
-	
+	public List<OrderVO> getOrderDetail(String o_d_num);
 	// 주문 상세정보 수정
 	public void editOrderDetail(OrderVO ovo);
-	
-	
 	// 주문 취소
-	public void cancelOrder(Integer o_d_num);
+	public void cancelOrder(String o_d_num);
 }

@@ -41,6 +41,12 @@ public class OrderVO {
 	
 	
 	
+	// 정산처리
+ 	private int o_year; // 결제날짜의 연도
+	private int o_month; // 결제날짜의 월
+	
+	
+	
 	public int getO_num() {
 		return o_num;
 	}
@@ -149,16 +155,28 @@ public class OrderVO {
 	public void setO_status(int o_status) {
 		this.o_status = o_status;
 	}
+	public int getO_year() {
+		return o_year;
+	}
+	public void setO_year(int o_year) {
+		this.o_year = o_year;
+	}
+	public int getO_month() {
+		return o_month;
+	}
+	public void setO_month(int o_month) {
+		this.o_month = o_month;
+	}
 	
 	
 	
 	@Override
 	public String toString() {
 		return "OrderVO [o_num=" + o_num + ", o_d_num=" + o_d_num + ", o_p_num=" + o_p_num + ", o_p_name=" + o_p_name
-				+ ", o_p_amount=" + o_p_amount + ", o_p_option=" + o_p_option + ", o_u_id=" + u_id + ", o_d_name="
+				+ ", o_p_amount=" + o_p_amount + ", o_p_option=" + o_p_option + ", u_id=" + u_id + ", o_d_name="
 				+ o_d_name + ", o_d_add=" + o_d_add + ", o_d_phone=" + o_d_phone + ", o_d_msg=" + o_d_msg
 				+ ", o_sum_money=" + o_sum_money + ", o_acc_type=" + o_acc_type + ", o_acc_payer=" + o_acc_payer
 				+ ", o_acc_date=" + o_acc_date + ", o_way_num=" + o_way_num + ", o_date=" + o_date + ", o_status="
-				+ o_status + "]";
+				+ o_status + ", o_year=" + o_year + ", o_month=" + o_month + "]";
 	}
 }

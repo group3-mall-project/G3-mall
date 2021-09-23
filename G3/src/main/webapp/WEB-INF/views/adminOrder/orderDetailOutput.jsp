@@ -13,11 +13,16 @@
 	  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	  crossorigin="anonymous">
     </script>
-    
+    <!--jQuery 라이브러리 추가-->
+        
 	<script type="text/javascript">
 		$(document).ready(function(){
 			var fr = $("#orderDetailForm");
-			
+			var backDest = "${backDest }";
+			var currentPageNum = "${currentPageNum }";
+			var numOfItemsPerPage = "${numOfItemsPerPage }";
+			var u_id = "${u_id }";
+
 			$("#editOrder").click(function(){
 				fr.attr("action", "./orderDetailEdit");
 				fr.attr("method", "get");
@@ -31,7 +36,9 @@
 			});
 			
 			$("#goBack").click(function(){
-				history.back();
+				if(backDest === "allUsersOrdersOutput") self.location = "./allUsersOrdersOutput?currentPageNum="+currentPageNum+"&numOfItemsPerPage="+numOfItemsPerPage;
+				else if(backDest === "singleUserOrdersOutput") self.location = "./singleUserOrdersOutput?currentPageNum="+currentPageNum+"&u_id="+u_id+"&numOfItemsPerPage="+numOfItemsPerPage;
+				else self.location = "./orderSearchOutput?currentPageNum="+currentPageNum+"&numOfItemsPerPage="+numOfItemsPerPage;
 			});
 		});
 	</script>
@@ -41,9 +48,13 @@
 	<h2>주문 상세정보(AdminOrderController)</h2>
 	
 	<form action="" id="orderDetailForm" method="post">
-		<c:set var="ovo1st" value="${listOrderDetail.get(0) }"/>
+		<c:set var="ovo1st" value="${listOfOrderDetail.get(0) }"/>
 		
 		<input type="hidden" name="o_d_num" value="${ovo1st.o_d_num }"> 
+		<input type="hidden" name="backDest" value="${backDest }"> 
+		<input type="hidden" name="currentPageNum" value="${currentPageNum }"> 
+		<input type="hidden" name="numOfItemsPerPage" value="${numOfItemsPerPage }"> 
+		<input type="hidden" name="u_id" value="${u_id }"> 
 				
 		<table border="1">
 			<tr>

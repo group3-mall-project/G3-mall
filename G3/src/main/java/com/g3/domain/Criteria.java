@@ -12,7 +12,7 @@ public class Criteria {
 		this.numOfItemsPerPage = numOfItemsPerPage;
 	}
 	public Criteria() {
-		this(1,1);
+		this(1,5);
 	}
 
 

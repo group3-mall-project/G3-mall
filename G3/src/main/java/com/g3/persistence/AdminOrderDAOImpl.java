@@ -158,15 +158,15 @@ public class AdminOrderDAOImpl implements AdminOrderDAO {
 		List<OrderVO> listOfOrderSearch;
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		String inquiryPeriod = osvo.getInquiryPeriod();
+		String queryPeriod = osvo.getQueryPeriod();
 		LocalDate beginningDate, endDate, currentDate;
 		
 		// 조회기간
 		beginningDate = endDate = currentDate = LocalDate.now(); // 오늘 날짜로 초기화
 		currentDate.getClass().getSimpleName();
 		
-		if(inquiryPeriod.equals("") == false) { // 오늘, 1주일, 1개월, 3개월
-			switch(inquiryPeriod) {
+		if(queryPeriod.equals("") == false) { // 오늘, 1주일, 1개월, 3개월
+			switch(queryPeriod) {
 				case "today":
 					beginningDate = endDate = currentDate;
 					break;
@@ -192,11 +192,17 @@ public class AdminOrderDAOImpl implements AdminOrderDAO {
 		
 		// 상세조건
 		String advacnedSearch = osvo.getAdvancedSearch();
-		String userQuery = osvo.getUserQuery();
+		String searchQuery = osvo.getSearchQuery();
+		
+		
+		System.out.println("상세조건: "+advacnedSearch);
+		System.out.println("검색질의: "+searchQuery);
+		System.out.println("시작날: "+advacnedSearch);
+		System.out.println("끝날: "+advacnedSearch);
 		
 		map.put("cri", cri); // 페이징 정보
-		map.put("o_srch_qy", userQuery); // 상세조건
-		map.put("o_srch_cond", advacnedSearch); // 사용자 질의
+		map.put("o_srch_qy", searchQuery); // 검색질의
+		map.put("o_srch_type", advacnedSearch); // 상세조건
 		map.put("o_begin_date", Date.valueOf(beginningDate)); // LocalDate를 SQL Date로 변환
 		map.put("o_end_date", Date.valueOf(endDate)); // LocalDate를 SQL Date로 변환
 		
@@ -220,7 +226,7 @@ public class AdminOrderDAOImpl implements AdminOrderDAO {
 		Integer numOfOrderSearch;
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		String inquiryPeriod = osvo.getInquiryPeriod();
+		String inquiryPeriod = osvo.getQueryPeriod();
 		LocalDate beginningDate, endDate, currentDate;
 		
 		// 조회기간
@@ -254,10 +260,10 @@ public class AdminOrderDAOImpl implements AdminOrderDAO {
 		
 		// 상세조건
 		String advacnedSearch = osvo.getAdvancedSearch();
-		String userQuery = osvo.getUserQuery();
+		String userQuery = osvo.getSearchQuery();
 				
 		map.put("o_srch_qy", userQuery); // 상세조건
-		map.put("o_srch_cond", advacnedSearch); // 사용자 질의
+		map.put("o_srch_type", advacnedSearch); // 사용자 질의
 		map.put("o_begin_date", Date.valueOf(beginningDate)); // LocalDate를 SQL Date로 변환
 		map.put("o_end_date", Date.valueOf(endDate)); // LocalDate를 SQL Date로 변환
 		
@@ -265,6 +271,9 @@ public class AdminOrderDAOImpl implements AdminOrderDAO {
 		System.out.println("Persistence(Mapper): adminOrderMapper.xml 이동 후 SQL 구문 실행\n");
 		
 		numOfOrderSearch = sqlSession.selectOne(namespace+".getNumOfSearchOrder", map);
+		// null일 경우 0을 삽입
+		if(numOfOrderSearch == null)
+			numOfOrderSearch = 0;
 		
 		System.out.println("Persistence(Mapper): getNumOfOrderSearch SQL 구문 실행완료\n");
 		System.out.println("Persistence(DAO): 주문검색 개수 완료\n");
@@ -322,7 +331,7 @@ public class AdminOrderDAOImpl implements AdminOrderDAO {
 	
 	// 운송장 번호
 	@Override
-	public String getTrackingNumber(Integer o_d_num) {
+	public String getTrackingNumber(String o_d_num) {
 		String trackingNumber;
 		
 		System.out.println("Persistence(DAO): getTrackingNumber(Integer o_d_num) 호출\n");
@@ -339,7 +348,7 @@ public class AdminOrderDAOImpl implements AdminOrderDAO {
 	
 	// 운송장 번호부여
 	@Override
-	public void addTrackingNumber(Integer o_d_num, String o_way_num) {
+	public void addTrackingNumber(String o_d_num, String o_way_num) {
 		
 		// 자료형이 다르기 때문에 Map 사용
 		Map<String, Object> map  = new HashMap<String, Object>();
@@ -361,7 +370,7 @@ public class AdminOrderDAOImpl implements AdminOrderDAO {
 	
 	// 주문 상세정보
 	@Override
-	public List<OrderVO> getOrderDetail(Integer o_d_num) {
+	public List<OrderVO> getOrderDetail(String o_d_num) {
 		List<OrderVO> listOrderDetail;
 		
 		System.out.println("Persistence(DAO): getOrderDetail(Integer o_d_num) 호출\n");
@@ -391,7 +400,7 @@ public class AdminOrderDAOImpl implements AdminOrderDAO {
 
 	// 주문취소
 	@Override
-	public void cancelOrder(Integer o_d_num) {
+	public void cancelOrder(String o_d_num) {
 		System.out.println("Persistence(DAO): cancelOrder(Integer o_d_num) 호출\n");
 		System.out.println("Persistence(Mapper): adminOrderMapper.xml 이동 후 SQL 구문 실행\n");
 		

@@ -204,7 +204,6 @@ public class AdminOrderDAOTest {
 		}
 	}
 	// 주문검색
-	*/
 	
 	// 운송장 번호부여
 	//@Test
@@ -219,4 +218,5 @@ public class AdminOrderDAOTest {
 		aodao.addTrackingNumber(8, trackingNumber);
 	}
 	// 운송장 번호부여
+	*/
 }

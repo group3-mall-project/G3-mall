@@ -17,13 +17,19 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 			var fr = $("#orderDetailEditForm");
+			var o_d_num = "${o_d_num }";
+			var backDest = "${backDest }";
+			var currentPageNum = "${currentPageNum }";
+			var numOfItemsPerPage = "${numOfItemsPerPage }";
+			var u_id = "${u_id}";
+
 			
 			$("#edit").click(function(){
 				fr.submit();
 			});
 			
 			$("#cancel").click(function(){
-				history.back();
+				self.location = "./orderDetailOutput?o_d_num="+o_d_num+"&backDest="+backDest+"&currentPageNum="+currentPageNum+"&numOfItemsPerPage="+numOfItemsPerPage+"&u_id="+u_id;
 			});
 		});
 	</script>
@@ -35,8 +41,11 @@
 	<form action="" id="orderDetailEditForm" method="post">
 		<c:set var="ovo1st" value="${listOfOrderDetail.get(0) }"/>
 		
-		<%-- <input type="hidden" name="o_d_num" value="${ovo1st.o_d_num }">  --%>
-		
+<%-- 		<input type="hidden" name="o_d_num" value="${ovo1st.o_d_num }">
+		<input type="hidden" name="backDest" value="${backDest }"> 
+		<input type="hidden" name="currentPageNum" value="${currentPageNum }"> 
+		<input type="hidden" name="u_id" value="${u_id }">  --%>
+				
 		<table border="1">
 			<tr>
 				<td colspan="6">
@@ -54,7 +63,7 @@
 			</tr>
 			
 			<c:set var="sumTotal" value="${0 }"/>
-			<c:forEach var="ovo" items="${listOrderDetail }">
+			<c:forEach var="ovo" items="${listOfOrderDetail }">
 				<c:set var="sumTotal" value="${sumTotal+ovo.o_sum_money }"/>
 				
 				<tr>
