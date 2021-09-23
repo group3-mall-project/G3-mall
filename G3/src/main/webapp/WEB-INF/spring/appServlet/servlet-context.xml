@@ -23,6 +23,23 @@
 	
 	<context:component-scan base-package="com.g3.web" />
 	
+	<!-- NaverLogin Class에 대한 Bean설정 추가 -->
+	<beans:bean id="naverClientID" class="java.lang.String">
+		<beans:constructor-arg value="unC2JZuizAwdG8LNJjlk"/>
+	</beans:bean>
+	<beans:bean id="naverClientSecret" class="java.lang.String">
+		<beans:constructor-arg 
+			value="IeTztj0qBd"/>
+	</beans:bean>
+	<beans:bean id="naverRedirectUrl" class="java.lang.String">
+		<beans:constructor-arg value="http://localhost:8080/web/user/login_callback"/>
+	</beans:bean>
 	
+	<beans:bean id="naverSns" class="com.g3.web.NaverLoginBO">
+		<beans:constructor-arg value="naver"/>
+		<beans:constructor-arg ref="naverClientID"/>
+		<beans:constructor-arg ref="naverClientSecret"/>
+		<beans:constructor-arg ref="naverRedirectUrl"/>
+	</beans:bean>
 	
 </beans:beans>
