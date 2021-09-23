@@ -1,35 +1,18 @@
 package com.g3.web;
 
-import java.util.Date;
-import java.util.Map;
-import java.util.Properties;
-
-import javax.inject.Inject;
-import javax.mail.Address;
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.Message.RecipientType;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.g3.domain.UserVO;
 import com.g3.service.UserService;
@@ -85,27 +68,35 @@ public class UserController {
 		return "redirect:/user/main";
 	}
 	
-	// 아이디 유효성 검사 ajax
-	// 아직 
-	// 못
-	// 만
-	// 들었
-	// 음
-	
-	@RequestMapping(value = "/idCheck",method = RequestMethod.POST)
+	// 아이디 유효성 검사
+	@RequestMapping(value = "/idCheck",method = RequestMethod.POST,produces = "text/plain; charset=utf-8")
+	@ResponseBody
 	public String idCheck(@RequestParam("u_id") String u_id, Model model)throws Exception{
 		
 		logger.info("idCheck() 호출@@@@"+u_id+"@@");
-		System.out.println(u_id);
 		
 		String result = service.u_idCheck(u_id);
-		logger.info("아이디 : "+result);
 		
-		model.addAttribute("result",result);
+		model.addAttribute("result", result);
 		
-		logger.info(" join 페이지로 이동 : "+result+u_id);
+		logger.info(" join 페이지로 이동 : "+result);
 		
-		return "redirect:/user/join";
+		return result;
+	}
+	
+	// 이메일 중복 유효성 검사
+	@RequestMapping(value = "/emailCheck",method = RequestMethod.POST,produces = "text/plain; charset=utf-8")
+	@ResponseBody
+	public String emailCheck(@RequestParam("u_email") String u_email, Model model)throws Exception {
+		
+		logger.info("emailCheck() 호출@@@@"+u_email);
+		String echeck = service.u_emailCheck(u_email);
+		
+		model.addAttribute("echeck",echeck);
+		
+		logger.info(" join 페이지로 이동"+echeck);
+		
+		return echeck;
 	}
 	
 	// 이메일 인증 하기
@@ -113,7 +104,7 @@ public class UserController {
 	public void emailCert(UserVO vo, HttpSession session, Model model)throws Exception{
 		
 		logger.info("emailCert() 호출@@@@");
-//		session.setAttribute("u_email",vo.getU_email());
+		session.setAttribute("u_email",vo.getU_email());
 		String certNum = service.createCertNum();
 		
 		boolean result = service.emailCertSend(vo.getU_email(),certNum);
@@ -258,22 +249,20 @@ public class UserController {
 	// 회원 아이디 이메일로 전송하기
 	// if문 고쳐야함 
 	@RequestMapping(value = "/findUserId",method = RequestMethod.POST)
-	public String findUserIdPOST(UserVO vo,Model model) throws Exception{
+	public String findUserIdPOST(@RequestParam("u_email") String u_email,Model model) throws Exception{
 		
-		logger.info("findUserIdPOST() 호출@@@@@"+vo.getU_email());
+		logger.info("findUserIdPOST() 호출@@@@@"+u_email);
 		
-		String u_email = vo.getU_email();
-		
-		vo = service.confirmEmail(u_email);
-		model.addAttribute("vo",vo);
-		if (vo == null) {
-			model.addAttribute("vo",vo);
+		String u_id = service.confirmEmail(u_email);
+		logger.info("이메일 받아오는값 : "+u_id);
+		if (u_id == null) {
+			model.addAttribute("u_id",u_id);
 			return "redirect:/user/findId";
 		}
+		model.addAttribute("u_id",u_id);
+		service.sendId(u_id,u_email);
 		
-		service.sendId(vo.getU_id(),vo.getU_email());
-		
-		logger.info("유저가 적은 이메일이 DB에 있는지 확인"+vo);
+		logger.info("유저가 적은 이메일이 DB에 있는지 확인"+u_id);
 		
 		return "redirect:/user/login";
 	}
@@ -290,21 +279,22 @@ public class UserController {
 	// 회원 비밀번호 이메일 전송
 	// if문으로 제어를 해줘야함
 	@RequestMapping(value = "/findUserPw",method = RequestMethod.POST)
-	public String sendPwPOST(UserVO vo,Model model,HttpSession session) throws Exception{
+	public String sendPwPOST(UserVO vo,Model model) throws Exception{
 		logger.info("sendPwPOST() 호출@@@@@");
 		
-		String u_id = vo.getU_id();
-		String u_email = vo.getU_email();
-		
-		UserVO uvo = service.findUserPw(vo);
+		String u_email = service.findUserPw(vo);
+		logger.info("확인 : "+u_email);
+		if(u_email == null) {
+			return "redirect:/user/findPw";
+		}
 		
 		String createPw = service.createPw();
 		
-		logger.info("이메일? : "+u_email+uvo.getU_email());
+		logger.info("이메일? : "+u_email+vo.getU_email());
 		vo.setU_pw(createPw);
 		service.updatePw(vo);
 		
-		service.sendPw(u_id,u_email,createPw);
+		service.sendPw(u_email,createPw);
 		
 		return "redirect:/user/login";
 	}
@@ -315,6 +305,9 @@ public class UserController {
 	
 	
 }
+
+
+
 
 
 
