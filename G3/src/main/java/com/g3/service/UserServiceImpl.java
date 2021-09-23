@@ -1,19 +1,9 @@
 package com.g3.service;
 
-import java.util.Date;
-import java.util.Properties;
 import java.util.UUID;
-
 import javax.inject.Inject;
-import javax.mail.Address;
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.Message.RecipientType;
-import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.mail.PasswordAuthentication;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -107,6 +97,20 @@ public class UserServiceImpl implements UserService{
 		return result;
 	}
 	
+	// 이메일 중복 유효성 검사
+	@Override
+	public String u_emailCheck(String u_email) {
+		
+		System.out.println(" S : DAO - u_emailCheck(u_email) 호출"+u_email);
+		
+		String echeck = udao.u_emailCheck(u_email);
+		
+		System.out.println(" S : DAO -> 컨트롤러 이동 @@@@"+echeck);
+		
+		return echeck;
+	}
+	
+	
 	// 이메일 인증에 필요한 난수6자리
 	@Override
 	public String createCertNum() {
@@ -121,92 +125,108 @@ public class UserServiceImpl implements UserService{
 		return certNum.toString();
 	}
 	
+	
+	
 	// 이메일 인증 전송
 	@Override
-	public boolean emailCertSend(String u_email, String certNum) {
+	public boolean emailCertSend(String u_email, String certNum){
 		
-		boolean result = false;
-		System.out.println("이메일 : "+u_email+"난수 : "+certNum);
+		boolean result = true;
+		
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				
+				System.out.println("이메일 : "+u_email+"난수 : "+certNum);
 
-		String setFrom = "gksaudwls124@gmail.com";
-		String toMail = u_email;
-		String title = "회원가입 인증 이메일 입니다.";
-		String content = "G3를이용해 주셔서 감사합니다." +
-				 "<br><br>" +
-				 "인증 번호는" + certNum + "입니다." +
-				 "<br>" +
-				 "해당 인증번호를 인증번호 확인란에 기입하여 주세요.";
-		
-		try {
-			
-			MimeMessage message = mailSender.createMimeMessage();
-			MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
-			helper.setFrom(setFrom);
-			helper.setTo(toMail);
-			helper.setSubject(title);
-			helper.setText(content, true);
-			mailSender.send(message);
-			
-			result = true;
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+				String setFrom = "gksaudwls124@gmail.com";
+				String toMail = u_email;
+				String title = "회원가입 인증 이메일 입니다.";
+				String content = "G3를이용해 주셔서 감사합니다." +
+						 "<br><br>" +
+						 "인증 번호는" + certNum + "입니다." +
+						 "<br>" +
+						 "해당 인증번호를 인증번호 확인란에 기입하여 주세요.";
+				
+				try {
+					
+					MimeMessage message = mailSender.createMimeMessage();
+					MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+					helper.setFrom(setFrom);
+					helper.setTo(toMail);
+					helper.setSubject(title);
+					helper.setText(content, true);
+					mailSender.send(message);
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				
+			}
+		}).start();
 		
 		return result;
 	}
 	
 	// ID 찾기 DB에 이메일이 있는지 확인하기
 	@Override
-	public UserVO confirmEmail(String u_email) {
+	public String confirmEmail(String u_email) {
 		
 		System.out.println(" S : DAO - confirmEmail(vo) 호출"+u_email);
 		
-		UserVO vo = udao.getEmail(u_email);
+		String u_id = udao.getEmail(u_email);
 		
-		System.out.println(" S : mapper에서 u_email이 있는지 확인"+vo);
+		System.out.println(" S : mapper에서 u_email이 있는지 확인"+u_id);
 		
-		return vo;
+		return u_id;
 	}
 	
 	// ID이메일로 보내주기
 	@Override
 	public void sendId(String u_id, String u_email) {
 		
-		String setFrom = "gksaudwls124@gmail.com";
-		String toMail = u_email;
-		String title = "회원님의 아이디 입니다.";
-		String content = "G3를이용해 주셔서 감사합니다." +
-				 "<br><br>" +
-				 "회원님의 아이디는" +u_id+ "입니다." +
-				 "<br>";
-		
-		try {
+		new Thread(new Runnable() {
 			
-			MimeMessage message = mailSender.createMimeMessage();
-			MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
-			helper.setFrom(setFrom);
-			helper.setTo(toMail);
-			helper.setSubject(title);
-			helper.setText(content, true);
-			mailSender.send(message);
-		}catch (Exception e) {
-			e.printStackTrace();
-		}	
+			@Override
+			public void run() {
 		
+				String setFrom = "gksaudwls124@gmail.com";
+				String toMail = u_email;
+				String title = "회원님의 아이디 입니다.";
+				String content = "G3를이용해 주셔서 감사합니다." +
+						 "<br><br>" +
+						 "회원님의 아이디는" +u_id+ "입니다." +
+						 "<br>";
+				
+				try {
+					
+					MimeMessage message = mailSender.createMimeMessage();
+					MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+					helper.setFrom(setFrom);
+					helper.setTo(toMail);
+					helper.setSubject(title);
+					helper.setText(content, true);
+					mailSender.send(message);
+				}catch (Exception e) {
+					e.printStackTrace();
+				}	
+			}
+		}).start();
 	}
 	
 	// PW이메일로 보내주기 id,email맞는지 확인
 	@Override
-	public UserVO findUserPw(UserVO vo) {
+	public String findUserPw(UserVO vo) {
 		
 		System.out.println(" S : DAO - findUserPw(u_id,u_email) 호출");
 		
-		udao.findPw(vo);
+		String u_email = udao.findPw(vo);
 		
 		System.out.println(" S : mapper에서 u_email이 있는지 확인"+vo.getU_email());
 		
-		return vo;
+		return u_email;
 	}
 	
 	// 랜덤 변경할 비밀번호 8자리
@@ -233,32 +253,38 @@ public class UserServiceImpl implements UserService{
 	
 	// 변경된 비밀번호 보내기
 	@Override
-	public void sendPw(String u_id, String u_email, String createPw) {
+	public void sendPw(String u_email, String createPw) {
 		
-		String setFrom = "gksaudwls124@gmail.com";
-		String toMail = u_email;
-		String title = "회원님의 비밀번호 입니다.";
-		String content = "G3를이용해 주셔서 감사합니다." +
-				 "<br><br>" +
-				 "회원님의 비밀번호는" +createPw+ "입니다." +
-				 "<br>";
-		
-		try {
+		new Thread(new Runnable() {
 			
-			MimeMessage message = mailSender.createMimeMessage();
-			MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
-			helper.setFrom(setFrom);
-			helper.setTo(toMail);
-			helper.setSubject(title);
-			helper.setText(content, true);
-			mailSender.send(message);
-		}catch (Exception e) {
-			e.printStackTrace();
-		}	
+			@Override
+			public void run() {
 		
+				String setFrom = "gksaudwls124@gmail.com";
+				String toMail = u_email;
+				String title = "회원님의 비밀번호 입니다.";
+				String content = "G3를이용해 주셔서 감사합니다." +
+						 "<br><br>" +
+						 "회원님의 비밀번호는" +createPw+ "입니다." +
+						 "<br>";
+				
+				try {
+					
+					MimeMessage message = mailSender.createMimeMessage();
+					MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+					helper.setFrom(setFrom);
+					helper.setTo(toMail);
+					helper.setSubject(title);
+					helper.setText(content, true);
+					mailSender.send(message);
+				}catch (Exception e) {
+					e.printStackTrace();
+				}	
+			}
+		}).start();
 	}
 	
-	
+	// 아래부터는 네이버 로그인에 필요한 것들
 	
 	
 	
