@@ -96,30 +96,44 @@ public class UserDAOImpl implements UserDAO{
 		return result;
 	}
 	
-	// ID 찾기 DB에 이메일이 있는지 확인하기
+	// 이메일 유효성 검사
 	@Override
-	public UserVO getEmail(String u_email) {
+	public String u_emailCheck(String u_email) {
 		
 		System.out.println(" DAO : memberMapper.xml 이동"+u_email);
 		
-		UserVO vo = sqlSession.selectOne(namespace+".getEmail",u_email);
+		String echeck = sqlSession.selectOne(namespace+".u_emailCheck",u_email);
 		
-		System.out.println(" DAO : 이메일 검사 완료"+vo);
+		System.out.println(" DAO : 이메일 유효성 검사 완료!"+echeck);
 		
-		return vo;
+		return echeck;
+	}
+	
+	
+	// ID 찾기 DB에 이메일이 있는지 확인하기
+	@Override
+	public String getEmail(String u_email) {
+		
+		System.out.println(" DAO : memberMapper.xml 이동"+u_email);
+		
+		String u_id = sqlSession.selectOne(namespace+".getEmail",u_email);
+		
+		System.out.println(" DAO : 이메일 검사 완료"+u_id);
+		
+		return u_id;
 	}
 	
 	// PW이메일로 보내주기 id,email맞는지 확인
 	@Override
-	public UserVO findPw(UserVO vo) {
+	public String findPw(UserVO vo) {
 		
 		System.out.println(" DAO : memberMapper.xml 이동");
 		
-		vo = sqlSession.selectOne(namespace+".checkFindPw",vo);
+		String u_email = sqlSession.selectOne(namespace+".checkFindPw",vo);
 		
 		System.out.println(" DAO : 이메일 검사 완료"+vo);
 		
-		return vo;
+		return u_email;
 	}
 	
 	// PW를 난수로 바꿔서 저장
