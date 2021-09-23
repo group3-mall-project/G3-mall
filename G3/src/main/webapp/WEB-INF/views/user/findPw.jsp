@@ -26,16 +26,16 @@
 <script type="text/javascript">
 	function findUserPw() {
 		
-		
+		var u_pw ='${u_pw}';
+		console.log("이메일"+u_pw);
+		if (u_pw == null) {
+			alert("무언가 잘못되었습니다.");
+			return false;
+		}else{
+			alert("이메일로 비밀번호를 전송했습니다.");
+		}
 		
 		
 		
 	}
 </script>
-
-
-
-
-
-
-
