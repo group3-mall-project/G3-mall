@@ -38,7 +38,7 @@ public class AdminOrderController {
 	
 	
 	// 회원ID 검색
-	// http://localhost:8088/controller/adminOrder/userSearch (GET)
+	// http://localhost:8088/adminOrder/userSearch (GET)
 	@RequestMapping(value="/userSearch", method=RequestMethod.GET)
 	public void searchUserOrderGET() throws Exception {
 		System.out.println("Presentation(Controller): searchUserOrderGET() 호출\n");
@@ -59,7 +59,7 @@ public class AdminOrderController {
 	
 
 	// 회원별 주문조회
-	// http://localhost:8088/controller/adminOrder/singleUserOrdersOutput (GET)
+	// http://localhost:8088/adminOrder/singleUserOrdersOutput (GET)
 	@RequestMapping(value="/singleUserOrdersOutput", method=RequestMethod.GET)
 	public void outputListOfOrdersOfSingleUserGET(Model model, Criteria cri, String u_id) throws Exception {
 		System.out.println("Presentation(Controller): outputListOfOrdersOfSingleUserGET(Model model, Criteria cri, String u_id) 호출\n");
@@ -77,7 +77,7 @@ public class AdminOrderController {
 	
 	
 	// 총 주문조회
-	// http://localhost:8088/controller/adminOrder/allUsersOrdersOutput (GET)
+	// http://localhost:8088/adminOrder/allUsersOrdersOutput (GET)
 	@RequestMapping(value="/allUsersOrdersOutput", method=RequestMethod.GET)
 	public void outputListOfOrdersOfAllUsersGET(HttpSession session, Model model, Criteria cri) throws Exception {
 		System.out.println("Presentation(Controller): outputListOfOrdersOfAllUsersGET(HttpSession session, Model model, Criteria cri) 호출\n");
@@ -95,7 +95,7 @@ public class AdminOrderController {
 	
 	
 	// 일일정산
-	// http://localhost:8088/controller/adminOrder/dailySumTotalOutput (GET)
+	// http://localhost:8088/adminOrder/dailySumTotalOutput (GET)
 	@RequestMapping(value="/dailySumTotalOutput", method=RequestMethod.GET)
 	public void outputListOfDailySumTotalGET(HttpSession session, Model model, Criteria cri) throws Exception {
 		System.out.println("Presentation(Controller): outputListOfDailySumTotalGET(HttpSession session, Model model, Criteria cri) 호출\n");
@@ -112,7 +112,7 @@ public class AdminOrderController {
 
 	
 	// 월별정산
-	// http://localhost:8088/controller/adminOrder/monthlySumTotalOutput (GET)	
+	// http://localhost:8088/adminOrder/monthlySumTotalOutput (GET)	
 	@RequestMapping(value="/monthlySumTotalOutput", method=RequestMethod.GET)
 	public void outputListOfMonthlySumTotalGET(HttpSession session, Model model, Criteria cri) throws Exception {
 		System.out.println("Presentation(Controller): outputListOfMonthlySumTotalGET(HttpSession session, Model model, Criteria cri) 호출\n");
@@ -129,7 +129,7 @@ public class AdminOrderController {
 	
 	
 	// 주문검색
-	// http://localhost:8088/controller/adminOrder/orderSearch
+	// http://localhost:8088/adminOrder/orderSearch
 	@RequestMapping(value="/orderSearch", method=RequestMethod.GET)
 	public void searchOrderGET() throws Exception {
 		System.out.println("Presentation(Controller): searchOrderGET() 호출\n");

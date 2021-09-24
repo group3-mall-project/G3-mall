@@ -7,7 +7,7 @@
 	<!-- 주문조회 -->
 	<select id="getListOfOrders" parameterType="map" resultType="OrderVO">
 		select o_d_num, o_acc_date, o_p_name, o_p_num, o_p_amount, sum(o_sum_money) as o_sum_money, o_status, u_id, o_d_name, o_d_add, o_way_num
-	    from ord
+	    from g3_ord
 	    <if test='u_id == "admin"'>
 	    	where u_id != #{u_id}
 	    </if>
@@ -25,7 +25,7 @@
 		select sum(o_d_num)
 		from(
 			select count(distinct(o_d_num)) as o_d_num
-		    from ord
+		    from g3_ord
 		    <if test='_parameter == "admin"'>
 		    	where u_id != #{_parameter}
 		    </if>
@@ -43,7 +43,7 @@
 	<!-- 일일정산 -->	
 	<select id="getListOfDailySumTotal" resultType="OrderVO">
       	select sum(o_sum_money) as o_sum_money, o_acc_date
-      	from ord
+      	from g3_ord
       	group by o_acc_date
       	order by o_acc_date desc
       	limit #{beginNumOfItems}, #{numOfItemsPerPage}
@@ -53,7 +53,7 @@
 	<!-- 일일정산 개수 -->	
 	<select id="getNumOfDailySumTotal" resultType="integer">
 		select count(distinct o_acc_date)
-		from ord
+		from g3_ord
 	</select>
 	<!-- 일일정산 개수 -->		
 
@@ -62,7 +62,7 @@
 	<!-- 월별정산 -->
 	<select id="getListOfMonthlySumTotal" resultType="OrderVO">
 	  	select year(o_acc_date) as o_year, month(o_acc_date) as o_month, sum(o_sum_money) as o_sum_money
-	  	from ord
+	  	from g3_ord
 	  	group by year(o_acc_date), month(o_acc_date)
 	  	order by year(o_acc_date) desc, month(o_acc_date) desc
 	  	limit #{beginNumOfItems}, #{numOfItemsPerPage}
@@ -72,7 +72,7 @@
 	<!-- 월별정산 개수 -->	
 	<select id="getNumOfMonthlySumTotal" resultType="integer">
 		select count(distinct year(o_acc_date), month(o_acc_date))
-		from ord
+		from g3_ord
 	</select>
 	<!-- 월별정산 개수 -->			
 	
@@ -81,7 +81,7 @@
 	<!-- 주문검색 -->
 	<select id="getListOfSearchOrder" resultType="OrderVO">
 		select o_d_num, o_acc_date, o_p_name, o_p_num, o_p_amount, sum(o_sum_money) as o_sum_money, o_status, u_id, o_d_name, o_d_add, o_way_num
-		from ord
+		from g3_ord
 		where o_acc_date between #{o_begin_date} and #{o_end_date}
 		<choose>
 			<when test='o_srch_type == "receiverName"'>and o_d_name = #{o_srch_qy}</when>
@@ -101,7 +101,7 @@
 		select sum(o_d_num)
 		from(
 			select count(distinct(o_d_num)) as o_d_num
-			from ord
+			from g3_ord
 			where o_acc_date between #{o_begin_date} and #{o_end_date}
 			<choose>
 				<when test='o_srch_type == "receiverName"'>and o_d_name = #{o_srch_qy}</when>
@@ -121,7 +121,7 @@
 	<!-- 중복되지 않는 운송장 번호생성 -->
 	<select id="generateUniqueTrackingNumber" resultType="string">
 		select o_way_num
-		from ord
+		from g3_ord
 		where o_way_num = #{o_way_num}
 	</select>
 	<!-- 중복되지 않는 운송장 번호생성 -->
@@ -129,14 +129,14 @@
 	<!-- 운송장 번호 -->
 	<select id="getTrackingNumber" resultType="string">
 		select distinct(o_way_num)
-		from ord
+		from g3_ord
 		where o_d_num = #{o_d_num}
 	</select>
 	<!-- 운송장 번호 -->
 	
 	<!-- 운송장 번호부여 -->
 	<update id="addTrackingNumber">
-		update ord
+		update g3_ord
 		set o_way_num = #{o_way_num}
 		where o_d_num = #{o_d_num}
 	</update>
@@ -147,14 +147,14 @@
 	<!--  주문 상세정보 -->
 	<select id="getOrderDetail" resultType="OrderVO">
 		select *
-		from ord
+		from g3_ord
 		where o_d_num = #{o_d_num}
 	</select>	
 	<!--  주문 상세정보 -->
 	
 	<!--  주문 상세정보 수정 -->
 	<update id="editOrderDetail">
-		update ord
+		update g3_ord
 		set o_status = #{o_status}
 		where o_d_num = #{o_d_num}
 	</update>
@@ -162,7 +162,7 @@
 	
 	<!-- 주문취소 -->
 	<delete id="cancelOrder">
-		delete from ord
+		delete from g3_ord
 		where o_d_num = #{o_d_num}
 	</delete>
 	<!-- 주문취소 -->

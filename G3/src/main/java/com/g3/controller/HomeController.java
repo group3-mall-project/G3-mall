@@ -1,4 +1,4 @@
-package com.g3.web;
+package com.g3.controller;
 
 import java.text.DateFormat;
 import java.util.Date;

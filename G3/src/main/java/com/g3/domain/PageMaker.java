@@ -1,4 +1,4 @@
-package com.g3.domain;
+/*package com.g3.domain;
 
 public class PageMaker {
 
@@ -109,4 +109,4 @@ public class PageMaker {
 	
 	
 	
-}
+}*/

@@ -1,4 +1,4 @@
-package com.g3.web;
+package com.g3.controller;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -42,7 +42,7 @@ public class BoardController {
    @Resource(name="uploadPath")
    private String uploadPath;
  
-   // http://localhost:8080/web/board/boardList
+   // http://localhost:8088/board/boardList
    
    //보드 리스트 페이지 이동
    @RequestMapping(value ="/boardList", method =  RequestMethod.GET)
