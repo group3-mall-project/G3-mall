@@ -11,6 +11,7 @@ public class BoardVO {
 	private String bo_content;
 	private int bo_readcount;
 	private int bo_re_ref;
+	private int bo_re_lev;
 	private int bo_re_seq;
 	private String bo_updatedate;
 	private int bo_p_num;
