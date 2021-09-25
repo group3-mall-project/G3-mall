@@ -13,20 +13,20 @@
 
 	<h3>목록(총 <c:out default="0" value="${pvo.numOfItems }"/>개)</h3>
 
-	<c:forEach var="ovo" items="${listOfMonthlySumTotal }">
-		<table border="1">
-			<tr>
-				<td>월별정산</td>
-				<td>연</td>
-				<td>월</td>
-			</tr>
+	<table border="1">
+		<tr>
+			<td>월별정산</td>
+			<td>연</td>
+			<td>월</td>
+		</tr>
+		<c:forEach var="ovo" items="${listOfMonthlySumTotal }">
 			<tr>
 				<td>${ovo.o_sum_money }</td>
 				<td>${ovo.o_year}</td>
 				<td>${ovo.o_month }</td>
 			</tr>
-		</table>
-	</c:forEach>
+		</c:forEach>
+	</table>
 
 	<c:if test="${pvo.pre }">
 		<a href="./monthlySumTotalOutput?currentPageNum=${pvo.beginNumOfPage-1 }">&laquo;</a>

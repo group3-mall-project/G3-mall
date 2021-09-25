@@ -49,7 +49,6 @@ public class UserController {
 		
 	}
 	
-	  // http://localhost:8088/user/join
 	// 회원 가입 창으로 넘어가는 메서드
 	@RequestMapping(value = "/join",method = RequestMethod.GET)
 	public void joinGet() throws Exception{

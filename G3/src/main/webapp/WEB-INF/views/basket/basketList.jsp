@@ -201,4 +201,4 @@
   <script src="${pageContext.request.contextPath }/resources/vendors/jquery.ajaxchimp.min.js"></script>
   <script src="${pageContext.request.contextPath }/resources/vendors/mail-script.js"></script>
   <script src="${pageContext.request.contextPath }/resources/js/main.js"></script>
-  <%@ include file="../include/footer.jsp" %>   
+<%@ include file="../include/footer.jsp" %>

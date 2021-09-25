@@ -64,7 +64,7 @@ public class BasketController {
 			// => 빨간글씨로 품절임박 *개 남음 표시 추가해야함 
 		}
 	
-	
+    // http://localhost:8088/basket/basketList
 	//장바구니 목록 + get,post 둘다 되도록 method 지움
 	@RequestMapping(value = "/basketList",method=RequestMethod.GET)
 	public void basketListGET(HttpSession session,Model model) throws Exception {
