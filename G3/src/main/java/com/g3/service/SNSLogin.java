@@ -1,6 +1,6 @@
 package com.g3.service;
 
-import com.g3.web.NaverLoginBO;
+import com.g3.controller.NaverLoginBO;
 import com.github.scribejava.core.builder.ServiceBuilder;
 import com.github.scribejava.core.oauth.OAuth20Service;
 

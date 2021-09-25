@@ -1,4 +1,4 @@
-package com.g3.web;
+package com.g3.controller;
 
 import com.g3.service.NaverAPI20;
 import com.g3.service.NaverLogin;

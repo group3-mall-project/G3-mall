@@ -1,4 +1,4 @@
-package com.g3.web;
+package com.g3.controller;
 
 import javax.servlet.http.HttpSession;
 
@@ -39,6 +39,7 @@ public class UserController {
 	// RequestMethod.POST 매핑할시 redirect를 쓴다
 	// POST는 데이터를 submit 시킬때 사용한다
 	
+	   // http://localhost:8088/user/main
 	// 메인페이지 보는 메서드
 	@RequestMapping(value = "/main",method = RequestMethod.GET)
 	public void mainGet() throws Exception{
@@ -48,6 +49,7 @@ public class UserController {
 		
 	}
 	
+	  // http://localhost:8088/user/join
 	// 회원 가입 창으로 넘어가는 메서드
 	@RequestMapping(value = "/join",method = RequestMethod.GET)
 	public void joinGet() throws Exception{
