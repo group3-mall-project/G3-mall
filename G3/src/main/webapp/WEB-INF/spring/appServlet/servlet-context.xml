@@ -59,4 +59,6 @@
 		<beans:constructor-arg ref="naverClientSecret"/>
 		<beans:constructor-arg ref="naverRedirectUrl"/>
 	</beans:bean>
+	
+	
 </beans:beans>
