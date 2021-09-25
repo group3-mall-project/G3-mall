@@ -30,7 +30,22 @@
 <!-- 			<max-request-size>41943040</max-request-size>			40MB -->
 <!-- 			<file-size-threshold>20971520</file-size-threshold>		20MB -->
 <!-- 		</multipart-config> -->
-		
+		<!-- 한글처리 필터등록 -->
+		<filter> 
+		       <filter-name>encoding</filter-name>
+		       <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		       <init-param>
+			 <param-name>encoding</param-name>
+			 <param-value>UTF-8</param-value>
+		       </init-param>
+		</filter>
+		    
+		    <filter-mapping>
+		    	<filter-name>encoding</filter-name>
+		    	<url-pattern>/*</url-pattern>
+		    </filter-mapping>
+
+		<!-- 한글처리 필터등록 -->
 		
 	</servlet>
 		
@@ -38,23 +53,5 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-
-	<!-- 한글처리 필터등록 -->
-
-    <filter> 
-       <filter-name>encoding</filter-name>
-       <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-       <init-param>
-         <param-name>encoding</param-name>
-         <param-value>UTF-8</param-value>
-       </init-param>
-    </filter>
-    
-    <filter-mapping>
-    	<filter-name>encoding</filter-name>
-    	<url-pattern>/*</url-pattern>
-    </filter-mapping>
-
-	<!-- 한글처리 필터등록 -->
 
 </web-app>
