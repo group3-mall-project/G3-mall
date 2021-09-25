@@ -7,7 +7,7 @@
 
        <!-- 상품추가 -->
 		<insert id="AddProduct">
-insert into g3_product(p_name, p_category, p_option, p_price, p_amount, p_content, p_image, p_thumbimg, p_date,ship_date, p_return_fee)
+		insert into g3_product(p_name, p_category, p_option, p_price, p_amount, p_content, p_image, p_thumbimg, p_date,ship_date, p_return_fee)
 		values(#{p_name}, #{p_category}, #{p_option}, #{p_price},#{p_amount}, #{p_content}, #{p_image},#{p_thumbimg}, now(),#{ship_date}, #{p_return_fee})
 		</insert>
 	

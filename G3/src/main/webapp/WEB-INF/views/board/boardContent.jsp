@@ -111,7 +111,7 @@
 	function deleteContent() {
 		var cf = confirm("삭제하시겠습니까?");
 		if(cf==true){
-			location.href="deleteContent?bo_num=${bovo.bo_num}";
+			location.href="deleteContent?bo_num=${vo.bo_num}";
 		}
 		
 	}

@@ -19,7 +19,7 @@
 
 <h1>수정하기</h1>
   <fieldset>
-      <form action="./ProductUpdate" method="post" >
+      <form action="./ProductUpdate" method="post">
       <input type="hidden" name="p_num" value="${avo.p_num}">
          상품이름 : <input type="text" name="p_name" value="${avo.p_name }"><br>
 		 카테고리 : <select name="p_category">

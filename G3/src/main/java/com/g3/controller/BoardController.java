@@ -43,7 +43,6 @@ public class BoardController {
    private String uploadPath;
  
    // http://localhost:8088/board/boardList
-   
    //보드 리스트 페이지 이동
    @RequestMapping(value ="/boardList", method =  RequestMethod.GET)
    public String board_listGET(BoardVO bovo, Model model, HttpSession session) {

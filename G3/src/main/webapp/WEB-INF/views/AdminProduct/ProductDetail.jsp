@@ -43,7 +43,7 @@ ${avo.p_name }
 
 </table>
    <h4><a href="./ProductSearchList?pgnum=${pgnum}">상품목록</a></h4>
-   <h4><a href="./ProductUpdate?p_num=${avo.p_num}">상품수정</a></h4>
+   <h4><a href="./ProductUpdate?p_num=${avo.p_num}&pgnum=${pgnum}">상품수정</a></h4>
    <h4><a href="./delete?p_num=${avo.p_num}">삭제</a></h4>
 
 

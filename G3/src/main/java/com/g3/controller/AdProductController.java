@@ -51,7 +51,7 @@ public class AdProductController {
    @Resource(name="uploadPath")
    private String uploadPath;
    
-   //http://localhost:8088/web/AdminProduct/addProduct
+   //http://localhost:8088/AdminProduct/addProduct
    
    @RequestMapping(value="/addProduct", method = RequestMethod.GET)
    public void AddProductGETs() throws Exception {

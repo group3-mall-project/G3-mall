@@ -1,6 +1,6 @@
 package com.g3.domain;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Ad_ProductVO {
 
@@ -13,7 +13,7 @@ public class Ad_ProductVO {
 	private String p_content;
 	private String p_image;
 	private String p_thumbimg;
-	private Date p_date;
+	private Timestamp p_date;
 	private String best;
 	private int ship_date;
 	private int p_return_fee;
@@ -66,10 +66,10 @@ public class Ad_ProductVO {
 	public void setP_image(String p_image) {
 		this.p_image = p_image;
 	}
-	public Date getP_date() {
+	public Timestamp getP_date() {
 		return p_date;
 	}
-	public void setP_date(Date p_date) {
+	public void setP_date(Timestamp p_date) {
 		this.p_date = p_date;
 	}
 	public String getBest() {
@@ -90,14 +90,13 @@ public class Ad_ProductVO {
 	public void setP_return_fee(int p_return_fee) {
 		this.p_return_fee = p_return_fee;
 	}
-	
-	
 	public String getP_thumbimg() {
 		return p_thumbimg;
 	}
 	public void setP_thumbimg(String p_thumbimg) {
 		this.p_thumbimg = p_thumbimg;
 	}
+	
 	@Override
 	public String toString() {
 		return "Ad_ProductVO [p_num=" + p_num + ", p_name=" + p_name + ", p_category=" + p_category + ", p_option="
@@ -105,7 +104,4 @@ public class Ad_ProductVO {
 				+ ", p_image=" + p_image + ", p_thumbimg=" + p_thumbimg + ", p_date=" + p_date + ", best=" + best
 				+ ", ship_date=" + ship_date + ", p_return_fee=" + p_return_fee + "]";
 	}
-
-	
-	
 }
