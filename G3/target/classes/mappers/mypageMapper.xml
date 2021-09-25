@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.g3.mapper.MypageMapper"/>
+
+
+
+
+<!-- 
+  <select id="orderList" resultType="com.g3.domain.order">
+    select o.o_p_name, o.
+    from product AS p
+    join ord AS o
+    on o.o_p_name = p.p_name
+    where o.u_id=#{@@@@@@@}
+    order by o.o_date
+  </select>
+ -->
+
+<!-- 	<insert id="AddProduct"> -->
+<!-- 		insert into product(p_num, p_name, p_category, p_option, p_price, p_amount, p_image, best, p_date, ship_date, p_return_fee)  -->
+<!-- 		values(#{p_num}, #{p_name}, #{p_category}, #{p_option}, #{p_price}, #{p_amount}, #{p_image}, #{best}, #{p_date}, #{ship_date}, #{p_return_fee}) -->
+<!-- 	</insert> -->

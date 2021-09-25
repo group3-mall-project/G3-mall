@@ -21,26 +21,22 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="com.g3.web" />
+	<context:component-scan base-package="com.g3.*" />
 	
-	<!-- NaverLogin Class에 대한 Bean설정 추가 -->
-	<beans:bean id="naverClientID" class="java.lang.String">
-		<beans:constructor-arg value="unC2JZuizAwdG8LNJjlk"/>
-	</beans:bean>
-	<beans:bean id="naverClientSecret" class="java.lang.String">
-		<beans:constructor-arg 
-			value="IeTztj0qBd"/>
-	</beans:bean>
-	<beans:bean id="naverRedirectUrl" class="java.lang.String">
-		<beans:constructor-arg value="http://localhost:8080/web/user/login_callback"/>
-	</beans:bean>
-	
-	<beans:bean id="naverSns" class="com.g3.web.NaverLoginBO">
-		<beans:constructor-arg value="naver"/>
-		<beans:constructor-arg ref="naverClientID"/>
-		<beans:constructor-arg ref="naverClientSecret"/>
-		<beans:constructor-arg ref="naverRedirectUrl"/>
-	</beans:bean>
+<!-- 업로드 패스 설정 --> 
+<beans:bean class="java.lang.String" id="uploadPath">
+ <beans:constructor-arg value="C:\STS_G3\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\G3\resources" />
+</beans:bean>
+
+<!-- 일반 파일 업로드 경로 -->
+<resources mapping="/imgUpload/**" location="/resources/imgUpload/" />
+
+<beans:bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
+ <beans:property name="maxUploadSize" value="10485760"/>
+</beans:bean>
+
+<!-- ck에디터 파일 업로드 경로 -->
+<resources mapping="/ckUpload/**" location="/resources/ckUpload/" />
 	
 	
 </beans:beans>
